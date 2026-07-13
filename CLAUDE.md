@@ -33,7 +33,11 @@ site/index.html      ← the deliverable. Single self-contained HTML file, Slide
                         fade/slide in on scroll (`.pre-reveal`/`.revealed`, progressive enhancement —
                         JS opts sections INTO the hidden state, so a JS failure leaves everything
                         visible) and the two headline throughput numbers in §01 count up on scroll
-                        into view (`[data-countup]`). Both respect `prefers-reduced-motion`.
+                        into view (`[data-countup]`). Both respect `prefers-reduced-motion`. An
+                        unnumbered `#sec-intro` ("Start here") sits between the hero and §01 — a
+                        plain-English roadmap of the four-act structure (diagnosis / see it live /
+                        the plan / the ask). It's deliberately NOT part of the §01–§10 numbering so
+                        it never forces a renumber of the many "see §0X" cross-references elsewhere.
 docs/bmad-roundtable.md  ← the 4-persona roundtable + red-team pass (the "why"), plus a "Round 2"
                            section documenting the later gap-closing pass and red-team ruling
 docs/data-model.md       ← every number, traced to the scenario file (the "how"), including a
@@ -48,6 +52,8 @@ data/ge-verona-scenario.html ← the original case prompt this brief answers (re
 - Browser QA (Playwright/Chromium) has been run four times: original 8-section page; after the Section 03 drill-down explorer; after the "Round 2" gap-closing pass (business-case callout, corrected 1.8% buffer stat, reordered risk list, resequenced roadmap, §10 decision-ask, Plant-3-off counter-banner); and after the scenario-preset buttons, count-up numbers, and scroll-reveal animation were added — each time confirming render, gauge math, and interactivity with no console errors. The "If Plant 3 slips" preset was independently verified to reproduce the hand-calculated downside case exactly (48,316 units, "2384 short of target") in one click.
 - If you change a lever assumption (capital, timing, produced-unit impact), edit the `LEVERS` array in `site/index.html`'s `<script>` tag and update the matching row in `docs/data-model.md` so the workpaper stays in sync with what the page computes. If you add a new lever combination worth demoing live, add it to `PRESETS` in the same `<script>`, not just as a manual toggle combo.
 - Deferred to a future pass, not currently in the deck (see `docs/bmad-roundtable.md` Round 2 "overruled on scope"): a two-tranche split of the Plant 2 lever, actual framework-customer renewal dates + a customer-level KRI, and a standalone quality-hold-gate callout (folded into the existing Plant 2 risk line instead).
+- Also published as a Claude Artifact for easy viewing/sharing: `https://claude.ai/code/artifact/6849d48d-99fd-4107-b1dd-bea9ddd621fc` (private by default — share via that page's share menu). This is a manually-maintained snapshot, not auto-synced: it's `site/index.html` with the outer `<!DOCTYPE>/<html>/<head>/<body>` tags stripped (the artifact host supplies its own), rebuilt via a small Node script kept in the session scratchpad. **Re-publish it after any future edit to `site/index.html`** or it will silently go stale. Known artifact-only caveat: the Google Fonts `@import` for Plus Jakarta Sans is likely blocked by the artifact host's CSP, so it renders in a system sans-serif there instead — cosmetic only, falls back cleanly.
+- For SharePoint/team distribution: prefer sharing the Artifact link over uploading the raw `.html` file — most SharePoint tenants either block `.html` uploads outright or serve them as a forced download/read-only preview that won't execute the page's JavaScript, which would silently kill every interactive element (simulator, presets, drill-down tree). If the raw file is uploaded anyway, teammates need to download and open it locally in a browser, not view it in-browser via SharePoint's own preview.
 
 ## Conventions
 
