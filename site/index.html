@@ -48,6 +48,8 @@ h1.hero-title{font-size:var(--text-display-xl);font-weight:800;letter-spacing:va
 /* ---------- CONTENT ---------- */
 .content{max-width:1120px;margin:0 auto;padding:64px 32px 140px;}
 .section{margin-bottom:76px;scroll-margin-top:32px;}
+.section.pre-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+.section.pre-reveal.revealed{opacity:1;transform:none;}
 .sec-num{font-size:12px;font-weight:700;letter-spacing:var(--tracking-wider);color:var(--periwinkle);text-transform:uppercase;}
 .sec-title{font-size:var(--text-display-md);font-weight:800;letter-spacing:var(--tracking-tight);line-height:1.1;margin:6px 0 8px;}
 .sec-lede{font-size:var(--text-body-lg);color:var(--body-text);max-width:800px;margin-bottom:26px;}
@@ -129,6 +131,16 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
 .glossary dd{font-size:13px;color:var(--body-text);margin:2px 0 10px;}
 
 /* ---------- simulator ---------- */
+.preset-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.preset-label{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+.preset-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.preset-btn{border:1px solid var(--border);background:#fff;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+.preset-btn:hover{border-color:var(--periwinkle);color:var(--fg);}
+.preset-btn.active{background:var(--periwinkle);border-color:var(--periwinkle);color:#fff;}
+
+.bottomline{font-size:1.2rem;line-height:1.55;font-weight:600;color:var(--fg);background:#fff;border-left:4px solid var(--olive);border-radius:var(--radius);padding:22px 26px;margin-bottom:26px;}
+.bottomline b{color:var(--olive);}
+
 .sim-wrap{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;}
 @media(max-width:900px){.sim-wrap{grid-template-columns:1fr;}}
 .lever-list{display:flex;flex-direction:column;gap:12px;}
@@ -310,8 +322,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
     </div>
 
     <div class="grid4">
-      <div class="metric"><div class="metric-value">50,700</div><div class="metric-label">Target effective throughput</div><div class="metric-note">+30% vs. today's ~39,000</div></div>
-      <div class="metric"><div class="metric-value">~51,600</div><div class="metric-label">Projected outcome</div><div class="metric-note">+900-unit buffer (~1.8%)</div></div>
+      <div class="metric"><div class="metric-value"><span data-countup="50700">50,700</span></div><div class="metric-label">Target effective throughput</div><div class="metric-note">+30% vs. today's ~39,000</div></div>
+      <div class="metric"><div class="metric-value">~<span data-countup="51600">51,600</span></div><div class="metric-label">Projected outcome</div><div class="metric-note">+900-unit buffer (~1.8%)</div></div>
       <div class="metric"><div class="metric-value">$14.5–24<small>M</small></div><div class="metric-label">Capital used</div><div class="metric-note">of the $48M envelope</div></div>
       <div class="metric"><div class="metric-value">4</div><div class="metric-label">Levers, sequenced</div><div class="metric-note">across 30 months — see §06</div></div>
     </div>
@@ -393,6 +405,11 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
     <div class="sec-num">04 — The interactive throughput bridge</div>
     <h2 class="sec-title">Toggle each lever to see what it's actually worth.</h2>
     <p class="sec-lede">This is the same model behind the recommendation — live. Turn a lever off to see what happens if the board doesn't fund it: the projected throughput, capital spend, quality, and cost all recompute immediately.</p>
+
+    <div class="preset-row">
+      <span class="preset-label">Try a scenario:</span>
+      <div class="preset-btns" id="presetBtns"><!-- populated by JS --></div>
+    </div>
 
     <div class="sim-wrap">
       <div class="lever-list" id="leverList"><!-- populated by JS --></div>
@@ -541,6 +558,10 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
     <h2 class="sec-title">Approve the phased spend. Not $48M, not zero.</h2>
     <p class="sec-lede">Everything above is analysis. This is the ask.</p>
 
+    <div class="bottomline">
+      <b>The bottom line:</b> Verona's plants aren't out of room — they're losing time to slow order handling, long machine changeovers, and one plant that's short-staffed. Fixing those four things gets us the growth target for about a third of the budget, and we'll know within six months whether it's working. <b>We recommend funding the first step today.</b>
+    </div>
+
     <div class="banner banner--good">
       <b>Approve $14.5–24M of phased spend, with Wave 0 starting now.</b> Wave 0 (diagnose &amp; quick wins, M0–3) is the cheapest, lowest-risk step and the one that de-risks everything after it — it costs the least and confirms the two assumptions worth testing before Wave 2 capital commits (Plant 2's nameplate stretch, Plant 1's true bottleneck). The $24–33.5M reserve stays uncommitted today; you are not approving a fourth plant, and you're not being asked to rule one out either — you're asked to revisit that question at the month-6 checkpoint (§08) with real OTIF, OEE, and vacancy-rate data in hand, instead of a forecast.
     </div>
@@ -610,6 +631,37 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
 
   var state = {};
   LEVERS.forEach(function(l){ state[l.id] = l.default; });
+
+  var PRESETS = [
+    { id:'today', label:'Today — no action', otif:false, p1:false, p2:false, p3:false },
+    { id:'fo-only', label:'Front office only', otif:true, p1:false, p2:false, p3:false },
+    { id:'p3-slips', label:'If Plant 3 slips', otif:true, p1:true, p2:true, p3:false },
+    { id:'recommended', label:'Recommended path', otif:true, p1:true, p2:true, p3:true }
+  ];
+
+  function activePresetId(){
+    for(var i=0;i<PRESETS.length;i++){
+      var p = PRESETS[i], match = true;
+      LEVERS.forEach(function(l){ if(state[l.id] !== p[l.id]) match = false; });
+      if(match) return p.id;
+    }
+    return null;
+  }
+
+  function renderPresets(){
+    var el = document.getElementById('presetBtns');
+    var activeId = activePresetId();
+    el.innerHTML = PRESETS.map(function(p){
+      return '<button class="preset-btn'+(p.id===activeId?' active':'')+'" data-preset="'+p.id+'">'+p.label+'</button>';
+    }).join('');
+    el.querySelectorAll('.preset-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var p = PRESETS.filter(function(x){ return x.id===btn.getAttribute('data-preset'); })[0];
+        LEVERS.forEach(function(l){ state[l.id] = p[l.id]; });
+        renderAll();
+      });
+    });
+  }
 
   function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
   function fmt1(n){ return n.toFixed(1); }
@@ -788,6 +840,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   function renderAll(){
     var s = computeState();
     renderLevers();
+    renderPresets();
     renderBridge();
     renderGauges(s);
     renderStatus(s);
@@ -966,6 +1019,49 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
 
   dzRenderLegend();
   dzRenderTree();
+})();
+
+(function(){
+  // ---------- section reveal-on-scroll (progressive enhancement: JS opts sections
+  // INTO the hidden-then-fade state, so a JS failure leaves everything visible) ----------
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced || !('IntersectionObserver' in window)) return;
+  var sections = document.querySelectorAll('.section');
+  sections.forEach(function(s){ s.classList.add('pre-reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.08 });
+  sections.forEach(function(s){ io.observe(s); });
+})();
+
+(function(){
+  // ---------- headline number count-up ----------
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = [].slice.call(document.querySelectorAll('[data-countup]'));
+  if(!els.length) return;
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function animate(el){
+    if(el.dataset.counted) return;
+    el.dataset.counted = '1';
+    var target = parseInt(el.getAttribute('data-countup'), 10);
+    if(reduced || !target){ el.textContent = fmt(target); return; }
+    var start = performance.now(), dur = 900;
+    function tick(now){
+      var t = Math.min(1, (now-start)/dur);
+      var eased = 1 - Math.pow(1-t, 3);
+      el.textContent = fmt(target*eased);
+      if(t<1) requestAnimationFrame(tick);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(tick);
+  }
+  if(!('IntersectionObserver' in window)){ els.forEach(animate); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } });
+  }, { threshold:0.6 });
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
