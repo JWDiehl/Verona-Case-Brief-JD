@@ -26,10 +26,9 @@ data/ge-verona-scenario.html ← the original case prompt this brief answers (re
 
 ## State / open items
 
-- Git repo is initialized locally with commits. **Not yet pushed to GitHub.**
-- Target GitHub repo: `https://github.com/JWDiehl/Verona-Case-Brief-JD` (create empty on GitHub first, no README/gitignore, then `git remote add origin ... && git push -u origin main`).
+- Pushed to GitHub: `https://github.com/JWDiehl/Verona-Case-Brief-JD` (`main` branch).
 - The scenario email referenced a July 6 board meeting; that date had already passed as of when this was built. **The real presentation date is still unconfirmed** — `site/index.html` does not hardcode a date; check before presenting.
-- No screenshot/browser QA was possible in the build environment (no headless Chromium available) — the JS model was verified with standalone Node assertions (matches the numbers in `docs/data-model.md` exactly) and HTML tags were checked for balance, but the page has not been visually rendered. Worth a manual open-in-browser check before the meeting.
+- Browser QA is done: `site/index.html` was rendered headlessly (Playwright/Chromium) and visually checked — Ivory/Olive/Periwinkle theme renders correctly, all 8 sections lay out cleanly. The section-03 simulator was exercised by flipping all 4 LEVERS off, which correctly dropped the gauges to baseline (38,880 units, $0 capital, 1.80% quality at ceiling, 100.2 cost index with the "breaches cost ceiling" warning firing) and back to the recommended state (51,606 units, $14.5–24.0M, 1.59%, 97.1). No console/page errors either state.
 - If you change a lever assumption (capital, timing, produced-unit impact), edit the `LEVERS` array in `site/index.html`'s `<script>` tag and update the matching row in `docs/data-model.md` so the workpaper stays in sync with what the page computes.
 
 ## Conventions
