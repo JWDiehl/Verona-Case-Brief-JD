@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GE Verona — Throughput Diagnostic — Board Recommendation — Slide3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --ivory:#F8F4ED; --olive:#39520F; --periwinkle:#4E56D3; --athletic:#D2FF57;
+  --electric-green:#25FF06; --cloud:#C6E4EC; --summer:#69D2E7;
+
+  --bg:#F8F4ED; --fg:#111111; --body-text:#444; --muted:#555;
+  --accent-dark:var(--olive); --accent-mid:var(--periwinkle); --accent:var(--athletic);
+
+  --border:#DDD9CF; --card-bg:#EFEBE2; --card-border:#DDD9CF; --surface-raised:#E8E4DB;
+  --warning:#C97C20; --destructive:#B4472B; --success:#2E7D32;
+  --logo-ink:#000000;
+
+  --font:'Plus Jakarta Sans',system-ui,sans-serif; --radius:6px; --skew-slash:12deg;
+
+  --text-display-xl:3.75rem; --text-display-lg:3rem; --text-display-md:2.25rem;
+  --text-display-sm:1.6rem; --text-body-lg:1.125rem; --text-overline:0.75rem;
+  --tracking-tight:-0.015em; --tracking-wider:0.06em;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--font);}
+body{line-height:1.55;-webkit-font-smoothing:antialiased;}
+.s3-logo{height:30px;width:auto;display:block;}
+
+/* ---------- HERO ---------- */
+.hero{min-height:82vh;padding:64px 7vw 56px;display:flex;flex-direction:column;border-bottom:1px solid var(--border);}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+.hero-meta{text-align:right;font-size:12px;color:var(--muted);line-height:1.7;}
+.hero-meta b{color:var(--fg);font-weight:700;}
+.overline{font-size:var(--text-overline);font-weight:700;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--olive);}
+.hero-body{margin-top:auto;max-width:1000px;}
+.slash-accent{display:inline-block;width:18px;height:42px;margin:0 6px;background:var(--athletic);transform:skewX(-12deg);vertical-align:-6px;}
+h1.hero-title{font-size:var(--text-display-xl);font-weight:800;letter-spacing:var(--tracking-tight);line-height:1.04;margin:18px 0 22px;}
+.hero-sub{font-size:var(--text-body-lg);color:var(--body-text);max-width:820px;}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:7px 15px;font-size:12.5px;font-weight:600;color:var(--fg);}
+.pill .pdot{width:8px;height:8px;border-radius:50%;background:var(--periwinkle);}
+.disclaimer{margin-top:28px;font-size:12px;color:var(--muted);max-width:840px;border-left:3px solid var(--olive);padding:8px 0 8px 14px;}
+
+/* ---------- CONTENT ---------- */
+.content{max-width:1120px;margin:0 auto;padding:64px 32px 140px;}
+.section{margin-bottom:76px;scroll-margin-top:32px;}
+.sec-num{font-size:12px;font-weight:700;letter-spacing:var(--tracking-wider);color:var(--periwinkle);text-transform:uppercase;}
+.sec-title{font-size:var(--text-display-md);font-weight:800;letter-spacing:var(--tracking-tight);line-height:1.1;margin:6px 0 8px;}
+.sec-lede{font-size:var(--text-body-lg);color:var(--body-text);max-width:800px;margin-bottom:26px;}
+p{margin-bottom:14px;color:var(--body-text);}
+.highlight{color:var(--olive);font-weight:700;}
+
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px 24px;}
+.card--white{background:#fff;}
+.card--olive{border-left:3px solid var(--olive);}
+.card--peri{border-left:3px solid var(--periwinkle);}
+.card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--fg);}
+.card p:last-child{margin-bottom:0;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:820px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+
+.metric{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.metric-value{font-size:1.9rem;font-weight:800;color:var(--olive);letter-spacing:-0.02em;line-height:1;}
+.metric-value small{font-size:0.9rem;font-weight:700;color:var(--muted);}
+.metric-label{font-size:11.5px;font-weight:600;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:0.04em;}
+.metric-note{font-size:12px;color:var(--body-text);margin-top:6px;}
+
+.table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0;}
+.table th{background:var(--surface-raised);color:var(--olive);text-align:left;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;padding:11px 13px;border-bottom:2px solid var(--olive);}
+.table td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--body-text);vertical-align:top;}
+.table tr:last-child td{border-bottom:none;}
+.table tr:hover td{background:#F5F1E8;}
+.table .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.table caption{caption-side:bottom;text-align:left;font-size:11.5px;color:var(--muted);padding-top:8px;font-style:italic;}
+
+.banner{background:var(--card-bg);border:1px solid var(--olive);border-radius:var(--radius);padding:16px 20px;font-size:14px;}
+.banner--warn{border-color:var(--warning);}
+.banner--good{border-color:var(--success);background:#EEF6EC;}
+.banner b{color:var(--fg);}
+
+.evidence{display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--border);}
+.evidence:last-child{border-bottom:none;}
+.evidence-num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--periwinkle);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+.evidence-label{font-weight:700;color:var(--fg);margin-bottom:2px;}
+.evidence-desc{font-size:13.5px;color:var(--body-text);}
+
+.board-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:820px){.board-split{grid-template-columns:1fr;}}
+.board-col{border-radius:var(--radius);padding:20px 22px;}
+.board-col--a{background:#EEF0FD;border:1px solid var(--periwinkle);}
+.board-col--b{background:#F2F1E6;border:1px solid var(--olive);}
+.board-col--c{background:#fff;border:1px solid var(--fg);}
+.board-col h3{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.board-col .who{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;}
+.board-col--a .who{color:var(--periwinkle);}
+.board-col--b .who{color:var(--olive);}
+.board-col--c .who{color:var(--fg);}
+.board-col ul{margin:0;padding-left:18px;}
+.board-col li{font-size:13.5px;color:var(--body-text);margin-bottom:7px;}
+
+ul.clean{list-style:none;padding:0;}
+ul.clean li{padding:7px 0 7px 22px;position:relative;font-size:14px;color:var(--body-text);border-bottom:1px solid var(--border);}
+ul.clean li:last-child{border-bottom:none;}
+ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;height:10px;background:var(--athletic);transform:skewX(-12deg);}
+
+.subhead{font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--olive);margin:24px 0 12px;}
+.footer{max-width:1120px;margin:0 auto;padding:30px 32px 60px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+
+.progress-rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:9000;}
+.progress-rail a{display:flex;align-items:center;gap:8px;text-decoration:none;font:600 11px/1 var(--font);color:var(--muted);transition:color .15s;justify-content:flex-end;}
+.progress-rail a .dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:all .15s;flex-shrink:0;}
+.progress-rail a .txt{opacity:0;transition:opacity .15s;white-space:nowrap;}
+.progress-rail a:hover .txt,.progress-rail a.active .txt{opacity:1;}
+.progress-rail a.active{color:var(--periwinkle);}
+.progress-rail a.active .dot{background:var(--periwinkle);transform:scale(1.5);}
+@media(max-width:1180px){.progress-rail{display:none;}}
+
+/* ---------- glossary ---------- */
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 24px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;}
+@media(max-width:820px){.glossary{grid-template-columns:1fr;}}
+.glossary dt{font-weight:700;color:var(--olive);font-size:13px;}
+.glossary dd{font-size:13px;color:var(--body-text);margin:2px 0 10px;}
+
+/* ---------- simulator ---------- */
+.sim-wrap{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;}
+@media(max-width:900px){.sim-wrap{grid-template-columns:1fr;}}
+.lever-list{display:flex;flex-direction:column;gap:12px;}
+.lever-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;transition:border-color .2s,background .2s;}
+.lever-card.is-on{border-color:var(--periwinkle);background:#F8F9FF;}
+.lever-top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.lever-name{font-weight:700;font-size:13.5px;}
+.lever-desc{font-size:12px;color:var(--body-text);margin-top:6px;}
+.lever-meta{font-size:11px;color:var(--muted);margin-top:8px;font-weight:600;}
+
+.switch{position:relative;width:42px;height:23px;flex-shrink:0;}
+.switch input{opacity:0;width:0;height:0;position:absolute;}
+.slider-track{position:absolute;inset:0;background:#ccc;border-radius:999px;transition:.2s;cursor:pointer;}
+.slider-track::before{content:"";position:absolute;height:17px;width:17px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.35);}
+.switch input:checked + .slider-track{background:var(--periwinkle);}
+.switch input:checked + .slider-track::before{transform:translateX(19px);}
+.switch input:focus-visible + .slider-track{outline:2px solid var(--periwinkle);outline-offset:2px;}
+
+.dashboard{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
+.status-banner{border-radius:var(--radius);padding:14px 18px;font-size:14px;font-weight:600;margin-bottom:18px;border:1px solid var(--border);}
+.status-banner.ok{background:#EEF6EC;border-color:var(--success);color:#1F5C24;}
+.status-banner.warn{background:#FDF3E7;border-color:var(--warning);color:#8A5417;}
+.status-banner.bad{background:#FBEAE6;border-color:var(--destructive);color:#7E2E1C;}
+
+.bridge-chart{display:flex;align-items:flex-end;gap:16px;height:230px;position:relative;padding-top:36px;margin-top:8px;}
+.bridge-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;}
+.bridge-bar{width:100%;max-width:84px;background:var(--olive);border-radius:4px 4px 0 0;position:relative;transition:height .45s cubic-bezier(.4,0,.2,1),background .3s ease;}
+.bridge-bar.total{background:var(--periwinkle);}
+.bridge-bar.off{background:#DDD9CF !important;}
+.bridge-value{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-weight:800;font-size:12.5px;white-space:nowrap;}
+.bridge-label{margin-top:10px;font-size:10.5px;text-align:center;color:var(--muted);font-weight:700;line-height:1.3;}
+.bridge-target-line{position:absolute;left:0;right:0;border-top:2px dashed var(--warning);z-index:1;}
+.bridge-target-label{position:absolute;right:2px;top:-17px;font-size:10px;color:var(--warning);font-weight:700;background:#fff;padding:0 4px;}
+
+.gauges{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px;}
+@media(max-width:900px){.gauges{grid-template-columns:repeat(2,1fr);}}
+.gauge{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;}
+.gauge-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+.gauge-value{font-size:1.3rem;font-weight:800;margin-top:4px;color:var(--fg);}
+.gauge-track{position:relative;height:10px;background:#fff;border:1px solid var(--border);border-radius:999px;margin:12px 0 4px;overflow:visible;}
+.gauge-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--olive);transition:width .4s ease,background .3s ease;}
+.gauge-marker{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--fg);}
+.gauge-marker .m-label{position:absolute;top:-15px;font-size:9px;font-weight:700;white-space:nowrap;transform:translateX(-50%);color:var(--muted);}
+.gauge-sub{font-size:11px;color:var(--muted);margin-top:8px;}
+
+/* ---------- timeline ---------- */
+.timeline{margin-top:8px;}
+.timeline-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:700;margin:0 0 10px 232px;border-bottom:1px solid var(--border);padding-bottom:6px;}
+.timeline-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.timeline-row .row-label{width:220px;flex-shrink:0;font-size:12.5px;font-weight:700;line-height:1.3;}
+.timeline-row .row-sub{font-size:10.5px;color:var(--muted);font-weight:500;display:block;margin-top:2px;}
+.timeline-track{position:relative;flex:1;height:30px;background:var(--surface-raised);border-radius:4px;}
+.timeline-bar{position:absolute;top:3px;bottom:3px;border-radius:4px;background:var(--periwinkle);color:#fff;font-size:10.5px;font-weight:700;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;}
+.timeline-bar.wave-olive{background:var(--olive);}
+.timeline-bar.contingent{background:repeating-linear-gradient(45deg,#8a8a8a,#8a8a8a 6px,#a8a8a8 6px,#a8a8a8 12px);}
+
+.q-list{counter-reset:q;}
+.q-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body-text);}
+.q-item:last-child{border-bottom:none;}
+.q-item::before{counter-increment:q;content:"Q"counter(q);flex-shrink:0;font-weight:700;color:var(--periwinkle);font-size:12.5px;width:30px;}
+</style>
+</head>
+<body class="page">
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-top">
+    <svg class="s3-logo" viewBox="0 0 248 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Slide3">
+      <text x="0" y="40" font-family="'Arial Black','Arial Bold',Arial,sans-serif" font-weight="900" font-size="48" fill="var(--logo-ink)" letter-spacing="-2.5">SLIDE</text>
+      <polygon points="166,5 181,5 166,45 151,45" fill="#25FF06"/>
+      <polygon points="189,5 204,5 189,45 174,45" fill="#25FF06"/>
+      <polygon points="212,5 227,5 212,45 197,45" fill="#25FF06"/>
+    </svg>
+    <div class="hero-meta">
+      <b>BOARD RECOMMENDATION</b><br>
+      Engagement: GE Verona Throughput Diagnostic<br>
+      Prepared by: Slide3 working team<br>
+      Method: BMAD roundtable (Business · Manufacturing/Ops · Analytics · Decision)
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <span class="overline">Operations Strategy · Constraint Diagnostic · Recommendation</span>
+    <h1 class="hero-title">Fix the system first.<span class="slash-accent"></span>The data doesn't support a new plant.</h1>
+    <p class="hero-sub"><b>Recommendation:</b> pursue a sequenced, five-step operational path — front-office recovery, a Plant 1 debottleneck, a Plant 2 friction fix, and a Plant 3 staffing ramp — to reach +30% effective throughput within 30 months. This uses <span class="highlight">$14.5–24M of the $48M capital envelope</span>, holding the rest in reserve, and improves quality and unit cost rather than merely protecting them. <b>Neither board camp is fully right</b> — the data shows a defensible third path. Toggle each lever below to see why.</p>
+    <div class="hero-pills">
+      <span class="pill"><span class="pdot"></span>Target: +30% effective throughput</span>
+      <span class="pill"><span class="pdot"></span>Projected: ~51,600 (900-unit buffer)</span>
+      <span class="pill"><span class="pdot"></span>$14.5–24M of $48M used</span>
+      <span class="pill"><span class="pdot"></span>Quality & cost improve, not just hold</span>
+    </div>
+    <div class="disclaimer">
+      All figures are <b>fictional, constructed for analysis practice</b> against the "GE Verona" training scenario. Nothing here represents a real organization. Numbers in the interactive model below are estimates derived transparently from the scenario's own data — see <code>docs/data-model.md</code> in the project repo for the full arithmetic.
+    </div>
+  </div>
+</header>
+
+<nav class="progress-rail" aria-label="Page progress">
+  <a href="#sec-1"><span class="txt">Recommendation</span><span class="dot"></span></a>
+  <a href="#sec-2"><span class="txt">Diagnosis</span><span class="dot"></span></a>
+  <a href="#sec-3"><span class="txt">Interactive bridge</span><span class="dot"></span></a>
+  <a href="#sec-4"><span class="txt">Plant evidence</span><span class="dot"></span></a>
+  <a href="#sec-5"><span class="txt">30-month roadmap</span><span class="dot"></span></a>
+  <a href="#sec-6"><span class="txt">Capital & guardrails</span><span class="dot"></span></a>
+  <a href="#sec-7"><span class="txt">Risks & KRIs</span><span class="dot"></span></a>
+  <a href="#sec-8"><span class="txt">Methodology</span><span class="dot"></span></a>
+</nav>
+
+<main class="content">
+
+  <!-- 1. RECOMMENDATION -->
+  <section class="section" id="sec-1">
+    <div class="sec-num">01 — Recommendation</div>
+    <h2 class="sec-title">What we'd do, and why — before the evidence trail.</h2>
+    <p class="sec-lede">The board was split on where to spend $48M: a new plant, or fixing what exists. Both camps agreed on the target and disagreed on the mechanism. The diagnosis below shows the data supports neither pure camp.</p>
+
+    <div class="grid3" style="margin-bottom:22px;">
+      <div class="board-col board-col--a">
+        <div class="who">Camp A said</div>
+        <h3>Build a new plant</h3>
+        <p style="font-size:13.5px;color:var(--body-text);">Plants are physically maxed out; no process work creates 30% more capacity. Fund a 4th plant or a major Plant 2 expansion.</p>
+      </div>
+      <div class="board-col board-col--b">
+        <div class="who">Camp B said</div>
+        <h3>Fix what we have</h3>
+        <p style="font-size:13.5px;color:var(--body-text);">Throughput is lost to process friction and a slow front office, not physical limits. Capital should go to debottlenecking, not concrete.</p>
+      </div>
+      <div class="board-col board-col--c">
+        <div class="who">What the data shows</div>
+        <h3>Fix first — with a data checkpoint</h3>
+        <p style="font-size:13.5px;color:var(--body-text);">Four fixable friction points (not one physical wall) can plausibly clear the target for a third of the budget. The unused capital is held in reserve, not spent pre-emptively on a plant the diagnosis doesn't support.</p>
+      </div>
+    </div>
+
+    <div class="grid4">
+      <div class="metric"><div class="metric-value">50,700</div><div class="metric-label">Target effective throughput</div><div class="metric-note">+30% vs. today's ~39,000</div></div>
+      <div class="metric"><div class="metric-value">~51,600</div><div class="metric-label">Projected outcome</div><div class="metric-note">+900-unit buffer (~2%)</div></div>
+      <div class="metric"><div class="metric-value">$14.5–24<small>M</small></div><div class="metric-label">Capital used</div><div class="metric-note">of the $48M envelope</div></div>
+      <div class="metric"><div class="metric-value">4</div><div class="metric-label">Levers, sequenced</div><div class="metric-note">across 30 months — see §05</div></div>
+    </div>
+
+    <div class="banner banner--good" style="margin-top:20px;">
+      <b>So what:</b> this path clears the board's throughput target without building a new plant or expanding Plant 2 — and it improves the quality rate (1.80%→~1.59%) and unit cost index (~100.2→~97.1) instead of merely holding them, because it fixes Plant 2's problems directly rather than scaling them up.
+    </div>
+  </section>
+
+  <!-- 2. DIAGNOSIS -->
+  <section class="section" id="sec-2">
+    <div class="sec-num">02 — Diagnosis</div>
+    <h2 class="sec-title">There is no single bottleneck. There's a chain of four fixable friction points.</h2>
+    <p class="sec-lede">Before the evidence: four terms come up throughout this brief. They're defined once, here, so nothing downstream assumes prior knowledge.</p>
+
+    <dl class="glossary">
+      <dt>OEE (Overall Equipment Effectiveness)</dt><dd>Availability × Performance × Quality — a single score for how much of a machine's theoretical output is actually captured. 100% is perfect; most real plants run 40–85%.</dd>
+      <dt>OTIF (On-Time-In-Full)</dt><dd>The share of orders delivered complete, by the promised date. "Effective throughput" in this brief means units shipped OTIF — not just units produced.</dd>
+      <dt>WIP (Work-in-Process)</dt><dd>Units that have entered production but haven't shipped yet — inventory sitting mid-process. High WIP in front of a stage is a sign that stage can't keep up.</dd>
+      <dt>Constraint (Theory of Constraints)</dt><dd>The one stage in a chain that limits how much the whole system can produce. Speeding up any other stage doesn't add throughput — it just piles up work in front of the real constraint.</dd>
+    </dl>
+
+    <div class="evidence">
+      <div class="evidence-num">1</div>
+      <div><div class="evidence-label">The front office is 95% queue, not work — a policy problem, not a capacity wall.</div>
+      <div class="evidence-desc">7.3 of the 14.2-week lead time (51%) elapses before a part is even cut. Actual hands-on-work across order entry, engineering, and scheduling totals ~16 hours — the other ~292 hours are queueing, caused by a shared 11-engineer pool with no triage, a weekly batch-release cutoff, and 6+ handoffs with no order owner. This is cheap and fast to fix — and it's why it's Lever 1.</div></div>
+    </div>
+    <div class="evidence">
+      <div class="evidence-num">2</div>
+      <div><div class="evidence-label">Plant 1 is genuinely near-full — but a 29-point OEE gap at its bottleneck is real, uncaptured throughput.</div>
+      <div class="evidence-desc">90% utilized, 23,400 of 26,000 nameplate. Little raw slack — but the CNC bottleneck cell runs at only 71% OEE, losing output to changeovers (95 min × 6/day) and 8% downtime before any new equipment is needed.</div></div>
+    </div>
+    <div class="evidence">
+      <div class="evidence-num">3</div>
+      <div><div class="evidence-label">Plant 2's "95% utilized" is the case's central trap — it's the friction, not the footprint.</div>
+      <div class="evidence-desc">Worst OEE (64%), worst downtime (15%), longest changeovers (140 min), worst quality (2.4% — already over the 1.8% ceiling on its own), worst unit cost (108). Expanding this plant, as Camp A proposed, would scale up the network's least-capable, highest-risk asset. Fixing it costs a fraction of expanding it.</div></div>
+    </div>
+    <div class="evidence">
+      <div class="evidence-num">4</div>
+      <div><div class="evidence-label">Plant 3's idle capacity is real, but the constraint is people and mix, not machines.</div>
+      <div class="evidence-desc">58% utilized, 7,200 nameplate units sitting idle behind a 22% skilled-labor vacancy rate — and configured mostly for custom work, not the standard-product backlog that's actually backed up. The lever here is staffing and mix conversion, not new floor space.</div></div>
+    </div>
+
+    <div class="banner banner--warn" style="margin-top:20px;">
+      <b>Sequencing risk to manage, not ignore:</b> speeding up the front office without also fixing Plant 2 doesn't add throughput — it just relocates the queue onto Plant 2's bottleneck. This is why the roadmap in §05 runs the Plant 2 fix in parallel with the front-office rollout, not after it.
+    </div>
+  </section>
+
+  <!-- 3. INTERACTIVE BRIDGE -->
+  <section class="section" id="sec-3">
+    <div class="sec-num">03 — The interactive throughput bridge</div>
+    <h2 class="sec-title">Toggle each lever to see what it's actually worth.</h2>
+    <p class="sec-lede">This is the same model behind the recommendation — live. Turn a lever off to see what happens if the board doesn't fund it: the projected throughput, capital spend, quality, and cost all recompute immediately.</p>
+
+    <div class="sim-wrap">
+      <div class="lever-list" id="leverList"><!-- populated by JS --></div>
+
+      <div class="dashboard">
+        <div class="status-banner" id="statusBanner"></div>
+
+        <div class="subhead" style="margin-top:0;">Throughput bridge (effective units / year)</div>
+        <div class="bridge-chart" id="bridgeChart"><!-- populated by JS --></div>
+
+        <div class="gauges" id="gauges"><!-- populated by JS --></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PLANT EVIDENCE -->
+  <section class="section" id="sec-4">
+    <div class="sec-num">04 — The three plants</div>
+    <h2 class="sec-title">Three plants, three different constraints — aggregate numbers hide this.</h2>
+    <p class="sec-lede">The plant-level data is what separates a defensible diagnosis from a coin flip between the two camps.</p>
+
+    <table class="table">
+      <caption>Table 4.1 — Plant operating profile, trailing 12 months (fictional data, from the scenario file).</caption>
+      <thead><tr><th>Metric</th><th class="num">Plant 1 (Verona)</th><th class="num">Plant 2 (Brescia)</th><th class="num">Plant 3 (Padua)</th></tr></thead>
+      <tbody>
+        <tr><td>Primary product line</td><td class="num">Standard pumps</td><td class="num">Compressor units</td><td class="num">Mixed / custom</td></tr>
+        <tr><td>Units shipped / yr</td><td class="num">23,400</td><td class="num">14,800</td><td class="num">9,800</td></tr>
+        <tr><td>Nameplate capacity (units/yr)</td><td class="num">26,000</td><td class="num">15,500</td><td class="num">17,000</td></tr>
+        <tr><td>Reported utilization</td><td class="num">90%</td><td class="num">95%</td><td class="num">58%</td></tr>
+        <tr><td>Bottleneck cell</td><td class="num">CNC machining</td><td class="num">Final test</td><td class="num">Assembly labor</td></tr>
+        <tr><td>OEE at bottleneck cell</td><td class="num">71%</td><td class="num">64%</td><td class="num">52%</td></tr>
+        <tr><td>Avg. changeover (bottleneck)</td><td class="num">95 min</td><td class="num">140 min</td><td class="num">60 min</td></tr>
+        <tr><td>Unplanned downtime</td><td class="num">8%</td><td class="num">15%</td><td class="num">6%</td></tr>
+        <tr><td>Skilled-labor vacancy rate</td><td class="num">4%</td><td class="num">7%</td><td class="num">22%</td></tr>
+        <tr><td>Field-return (quality) rate</td><td class="num">1.5%</td><td class="num">2.4%</td><td class="num">1.6%</td></tr>
+        <tr><td>Unit cost index (100 = avg)</td><td class="num">94</td><td class="num">108</td><td class="num">103</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid3" style="margin-top:20px;">
+      <div class="card card--white"><h3>Plant 1 — Verona</h3><p>The volume engine, near nameplate. OEE at the CNC cell is the lever — not new equipment.</p></div>
+      <div class="card card--white"><h3>Plant 2 — Brescia</h3><p>Reportedly "maxed," actually the most broken. Fix before scale.</p></div>
+      <div class="card card--white"><h3>Plant 3 — Padua</h3><p>Idle capacity on paper, gated by staffing and a demand-mix mismatch.</p></div>
+    </div>
+  </section>
+
+  <!-- 5. ROADMAP -->
+  <section class="section" id="sec-5">
+    <div class="sec-num">05 — 30-month roadmap</div>
+    <h2 class="sec-title">Sequenced so no fix runs ahead of the constraint it depends on.</h2>
+    <p class="sec-lede">The front-office and Plant 2 fixes run in parallel deliberately — see the sequencing risk in §02. A capital reserve is held, not committed, in case month-6/12 data says otherwise.</p>
+
+    <div class="timeline">
+      <div class="timeline-axis"><span>M0</span><span>M6</span><span>M12</span><span>M18</span><span>M24</span><span>M30</span></div>
+      <div class="timeline-row">
+        <div class="row-label">Wave 0 — Diagnose & quick wins<span class="row-sub">Time-motion study, triage design</span></div>
+        <div class="timeline-track"><div class="timeline-bar" style="left:0%;width:10%;">M0–3</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="row-label">Wave 1 — Front-office / OTIF fix<span class="row-sub">Order-mgmt redesign + triage rollout</span></div>
+        <div class="timeline-track"><div class="timeline-bar" style="left:7%;width:40%;">M2–14</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="row-label">Wave 2 — Plant 1 & Plant 2 fixes<span class="row-sub">Run in parallel — see §02 sequencing risk</span></div>
+        <div class="timeline-track"><div class="timeline-bar wave-olive" style="left:13%;width:37%;">M4–15</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="row-label">Wave 3 — Plant 3 staffing & mix ramp<span class="row-sub">Highest single-lever risk — see §07</span></div>
+        <div class="timeline-track"><div class="timeline-bar wave-olive" style="left:20%;width:37%;">M6–18</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="row-label">Wave 4 — Contingency reserve<span class="row-sub">$24–33.5M held; deploy only if KRIs miss</span></div>
+        <div class="timeline-track"><div class="timeline-bar contingent" style="left:60%;width:40%;">M18–30, if needed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CAPITAL & GUARDRAILS -->
+  <section class="section" id="sec-6">
+    <div class="sec-num">06 — Capital & guardrails</div>
+    <h2 class="sec-title">Inside the envelope, inside the non-negotiables, with room to spare.</h2>
+
+    <div class="grid4" style="margin-bottom:22px;">
+      <div class="metric"><div class="metric-value">$48<small>M</small></div><div class="metric-label">Total envelope</div></div>
+      <div class="metric"><div class="metric-value">$14.5–24<small>M</small></div><div class="metric-label">Recommended spend</div><div class="metric-note">$24–33.5M held in reserve</div></div>
+      <div class="metric"><div class="metric-value">1.59<small>%</small></div><div class="metric-label">Projected quality</div><div class="metric-note">vs. ≤1.8% ceiling — improves</div></div>
+      <div class="metric"><div class="metric-value">97.1</div><div class="metric-label">Projected cost index</div><div class="metric-note">vs. ≤100 ceiling — improves</div></div>
+    </div>
+
+    <table class="table">
+      <caption>Table 6.1 — Lever-by-lever capital and timing.</caption>
+      <thead><tr><th>Lever</th><th class="num">Capital</th><th class="num">Time to effect</th><th>Depends on</th></tr></thead>
+      <tbody>
+        <tr><td>Front-office / order-mgmt redesign + engineering triage</td><td class="num">$4.5–8M</td><td class="num">3–14 mo</td><td>Nothing — can start immediately</td></tr>
+        <tr><td>Plant 1 CNC debottleneck</td><td class="num">$6–9M</td><td class="num">6–10 mo</td><td>Wave 0 root-cause confirmation</td></tr>
+        <tr><td>Plant 2 changeover/downtime/quality fix</td><td class="num">$1–2M</td><td class="num">9–15 mo</td><td>Wave 0 time-motion study (nameplate assumption)</td></tr>
+        <tr><td>Plant 3 staffing & mix ramp</td><td class="num">$3–5M</td><td class="num">9–15 mo</td><td>Labor-market conditions; mix-conversion feasibility</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7. RISKS & KRIs -->
+  <section class="section" id="sec-7">
+    <div class="sec-num">07 — Risks & month-6 leading indicators</div>
+    <h2 class="sec-title">What could break this, and how the board will know by month 6.</h2>
+
+    <div class="grid2">
+      <div class="card card--olive">
+        <h3>Risks & dependencies</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>Plant 2's nameplate "stretch" assumption (§data-model) is unverified — validate with a time-motion study in Wave 0 before committing Wave 2 capital.</li>
+          <li>Plant 3 retraining/mix conversion is the single largest lever (+3,290 effective units) and the highest execution risk — labor market and mix feasibility both matter.</li>
+          <li>Speeding the front office ahead of Plant 2 risks relocating WIP onto Plant 2's bottleneck instead of adding throughput.</li>
+          <li>Engineering triage may face internal resistance — it changes how a shared, informally-run pool of 11 engineers is managed.</li>
+        </ul>
+      </div>
+      <div class="card card--olive">
+        <h3>Month-6 KRIs the board should ask for</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>OTIF rate trend (target: visible movement off 81% toward 94%).</li>
+          <li>Plant 1 CNC OEE trajectory (target: moving off 71% toward ~82%).</li>
+          <li>Plant 2 changeover time & downtime % trend (target: 140min/15% both falling).</li>
+          <li>Plant 3 skilled-labor vacancy rate (target: moving off 22% toward ~10%).</li>
+          <li>Plant 2 WIP level (should not be rising — an early sign of the sequencing risk above).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. METHODOLOGY -->
+  <section class="section" id="sec-8">
+    <div class="sec-num">08 — Methodology</div>
+    <h2 class="sec-title">How this diagnosis was built.</h2>
+    <p class="sec-lede">This recommendation was developed through a structured four-persona roundtable — Business, Manufacturing/Ops, Analytics, and Decision — with an adversarial red-team pass against both board camps before the recommendation was locked. The full workpaper, including every assumption behind the numbers on this page, is in the project repo.</p>
+    <div class="banner">
+      <b>In the repo:</b> <code>docs/bmad-roundtable.md</code> (full roundtable + red-team) and <code>docs/data-model.md</code> (every number, traceable back to the scenario file). Open the repo in VSCode to read, audit, or adjust any assumption — the simulator above reads directly from the same model documented there.
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <b>Slide3 · GE Verona Throughput Diagnostic · Board Recommendation v1.0</b><br>
+  All figures are fictional and constructed for this training exercise; "GE Verona" is a hypothetical company. This brief intentionally shows its work — every number in the interactive model traces to a stated assumption in <code>docs/data-model.md</code>.
+</footer>
+
+<script>
+(function(){
+  // ---------- progress rail ----------
+  var links=[].slice.call(document.querySelectorAll('.progress-rail a'));
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active');});
+        if(map[e.target.id])map[e.target.id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  links.forEach(function(a){
+    var t=document.getElementById(a.getAttribute('href').slice(1));
+    if(t)io.observe(t);
+    a.addEventListener('click',function(ev){ev.preventDefault();if(t)t.scrollIntoView({behavior:'smooth'});});
+  });
+})();
+
+(function(){
+  // ---------- lever simulator ----------
+  var BASE_PRODUCED_TOTAL = 48000;
+  var BASE_EFFECTIVE = 39000;
+  var TARGET_EFFECTIVE = 50700;
+  var CAPITAL_ENVELOPE = 48;
+  var QUALITY_CEILING = 1.8;
+  var COST_CEILING = 100;
+  var MAX_SCALE = 58500; // sum of nameplate capacity across all 3 plants
+
+  var LEVERS = [
+    { id:'otif', label:'Front-office / OTIF recovery', kind:'otif', default:true,
+      capital:[4.5,8], months:[3,14],
+      desc:'Order-management redesign + engineering triage + faster batch cadence. Raises OTIF from 81% to 94% on the same produced volume.' },
+    { id:'p1', label:'Plant 1 — CNC debottleneck', kind:'plant', default:true,
+      capital:[6,9], months:[6,10],
+      desc:'OEE 71%→~82% at the CNC bottleneck via changeover & downtime reduction.',
+      producedDelta:2300, quality:1.4, cost:92, baseProduced:23400, baseQuality:1.5, baseCost:94, nameplate:26000 },
+    { id:'p2', label:'Plant 2 — changeover & downtime fix', kind:'plant', default:true,
+      capital:[1,2], months:[9,15],
+      desc:'OEE 64%→~70% via SMED changeover reduction and downtime reduction — explicitly not an expansion.',
+      producedDelta:1100, quality:1.9, cost:102, baseProduced:14800, baseQuality:2.4, baseCost:108, nameplate:15500 },
+    { id:'p3', label:'Plant 3 — staffing & mix ramp', kind:'plant', default:true,
+      capital:[3,5], months:[9,15],
+      desc:'Cuts the 22% skilled-labor vacancy toward ~10% and converts idle capacity toward standard-product mix.',
+      producedDelta:3500, quality:1.6, cost:101, baseProduced:9800, baseQuality:1.6, baseCost:103, nameplate:17000 }
+  ];
+
+  var state = {};
+  LEVERS.forEach(function(l){ state[l.id] = l.default; });
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function fmt1(n){ return n.toFixed(1); }
+  function fmt2(n){ return n.toFixed(2); }
+
+  function computeState(){
+    var otifRate = state.otif ? 0.94 : 0.81;
+    var producedTotal = BASE_PRODUCED_TOTAL;
+    var qualityNum = 0, costNum = 0;
+    var capitalLo = 0, capitalHi = 0, monthsMax = 0;
+
+    if(state.otif){ capitalLo += LEVERS[0].capital[0]; capitalHi += LEVERS[0].capital[1]; monthsMax = Math.max(monthsMax, LEVERS[0].months[1]); }
+
+    var plantProduced = {}, plantQuality = {}, plantCost = {};
+    LEVERS.filter(function(l){return l.kind==='plant';}).forEach(function(l){
+      var on = state[l.id];
+      var produced = on ? l.baseProduced + l.producedDelta : l.baseProduced;
+      var quality = on ? l.quality : l.baseQuality;
+      var cost = on ? l.cost : l.baseCost;
+      if(on){ producedTotal += l.producedDelta; capitalLo += l.capital[0]; capitalHi += l.capital[1]; monthsMax = Math.max(monthsMax, l.months[1]); }
+      qualityNum += produced*quality;
+      costNum += produced*cost;
+      plantProduced[l.id]=produced; plantQuality[l.id]=quality; plantCost[l.id]=cost;
+    });
+
+    var effective = Math.round(producedTotal*otifRate);
+    var quality = qualityNum/producedTotal;
+    var cost = costNum/producedTotal;
+
+    return { producedTotal:producedTotal, effective:effective, quality:quality, cost:cost, capitalLo:capitalLo, capitalHi:capitalHi, monthsMax:monthsMax, otifRate:otifRate };
+  }
+
+  // sequential bridge snapshots for the waterfall visual (order: baseline -> otif -> p1 -> p2 -> p3)
+  function computeBridgeSteps(){
+    var steps = [{ id:'base', label:'Today', value: BASE_EFFECTIVE, active:true }];
+    var runningProduced = BASE_PRODUCED_TOTAL;
+    var runningOtif = 0.81;
+    var prevValue = BASE_EFFECTIVE;
+
+    LEVERS.forEach(function(l){
+      var on = state[l.id];
+      if(l.kind==='otif'){
+        if(on) runningOtif = 0.94;
+      } else {
+        if(on) runningProduced += l.producedDelta;
+      }
+      var value = on ? Math.round(runningProduced*runningOtif) : prevValue;
+      steps.push({ id:l.id, label: l.kind==='otif' ? '+ OTIF fix' : '+ '+l.label.split('—')[0].trim()+' fix', value:value, active:on });
+      prevValue = value;
+    });
+    steps[steps.length-1].isTotal = true;
+    return steps;
+  }
+
+  function renderLevers(){
+    var wrap = document.getElementById('leverList');
+    wrap.innerHTML = '';
+    LEVERS.forEach(function(l){
+      var card = document.createElement('div');
+      card.className = 'lever-card' + (state[l.id] ? ' is-on' : '');
+      card.innerHTML =
+        '<div class="lever-top">'+
+          '<div class="lever-name">'+l.label+'</div>'+
+          '<label class="switch"><input type="checkbox" data-lever="'+l.id+'" '+(state[l.id]?'checked':'')+'><span class="slider-track"></span></label>'+
+        '</div>'+
+        '<div class="lever-desc">'+l.desc+'</div>'+
+        '<div class="lever-meta">$'+l.capital[0]+'–'+l.capital[1]+'M &middot; '+l.months[0]+'–'+l.months[1]+' months</div>';
+      wrap.appendChild(card);
+    });
+    wrap.querySelectorAll('input[type=checkbox]').forEach(function(input){
+      input.addEventListener('change', function(){
+        state[input.getAttribute('data-lever')] = input.checked;
+        renderAll();
+      });
+    });
+  }
+
+  function renderBridge(){
+    var steps = computeBridgeSteps();
+    var el = document.getElementById('bridgeChart');
+    el.innerHTML = '';
+    var targetPct = (TARGET_EFFECTIVE/MAX_SCALE)*100;
+    var line = document.createElement('div');
+    line.className='bridge-target-line';
+    line.style.bottom = targetPct+'%';
+    line.innerHTML = '<span class="bridge-target-label">Target 50,700</span>';
+    el.appendChild(line);
+
+    steps.forEach(function(s){
+      var col = document.createElement('div');
+      col.className = 'bridge-col';
+      var heightPct = (s.value/MAX_SCALE)*100;
+      var barClass = 'bridge-bar' + (s.isTotal ? ' total' : '') + (!s.active && s.id!=='base' ? ' off' : '');
+      col.innerHTML =
+        '<div class="'+barClass+'" style="height:'+heightPct+'%;">'+
+          '<span class="bridge-value">'+fmt(s.value)+'</span>'+
+        '</div>'+
+        '<div class="bridge-label">'+s.label+(s.active===false && s.id!=='base' ? ' (off)' : '')+'</div>';
+      el.appendChild(col);
+    });
+  }
+
+  function gaugeHTML(label, value, valueLabel, max, markers, fillPct, color, sub){
+    var markersHTML = markers.map(function(m){
+      return '<div class="gauge-marker" style="left:'+(m.pct)+'%;"><span class="m-label">'+m.label+'</span></div>';
+    }).join('');
+    return '<div class="gauge">'+
+      '<div class="gauge-label">'+label+'</div>'+
+      '<div class="gauge-value">'+valueLabel+'</div>'+
+      '<div class="gauge-track">'+markersHTML+'<div class="gauge-fill" style="width:'+fillPct+'%;background:'+color+';"></div></div>'+
+      '<div class="gauge-sub">'+sub+'</div>'+
+    '</div>';
+  }
+
+  function renderGauges(s){
+    var el = document.getElementById('gauges');
+    var effOK = s.effective >= TARGET_EFFECTIVE;
+    var capOK = s.capitalHi <= CAPITAL_ENVELOPE;
+    var qualOK = s.quality <= QUALITY_CEILING;
+    var costOK = s.cost <= COST_CEILING;
+
+    var effMax = 58000;
+    var g1 = gaugeHTML('Effective throughput', s.effective, fmt(s.effective),
+      effMax, [{pct:(BASE_EFFECTIVE/effMax)*100,label:'Today'},{pct:(TARGET_EFFECTIVE/effMax)*100,label:'Target'}],
+      Math.min(100,(s.effective/effMax)*100), effOK?'var(--success)':'var(--warning)',
+      effOK ? '✓ Clears the +30% target' : (TARGET_EFFECTIVE - s.effective)+' short of target');
+
+    var capMax = CAPITAL_ENVELOPE;
+    var g2 = gaugeHTML('Capital committed', s.capitalHi, '$'+fmt1(s.capitalLo)+'–'+fmt1(s.capitalHi)+'M',
+      capMax, [{pct:100,label:'$48M cap'}],
+      Math.min(100,(s.capitalHi/capMax)*100), capOK?'var(--olive)':'var(--destructive)',
+      capOK ? '$'+fmt1(CAPITAL_ENVELOPE - s.capitalHi)+'M held in reserve' : 'Over the $48M envelope');
+
+    var qMax = 3;
+    var g3 = gaugeHTML('Blended quality (field-return)', s.quality, fmt2(s.quality)+'%',
+      qMax, [{pct:(QUALITY_CEILING/qMax)*100,label:'≤1.8% ceiling'}],
+      Math.min(100,(s.quality/qMax)*100), qualOK?'var(--olive)':'var(--destructive)',
+      qualOK ? 'Within the ≤1.8% ceiling' : 'Breaches the 1.8% ceiling');
+
+    var cMax = 115;
+    var g4 = gaugeHTML('Blended unit-cost index', s.cost, fmt1(s.cost),
+      cMax, [{pct:(COST_CEILING/cMax)*100,label:'≤100 ceiling'}],
+      Math.min(100,(s.cost/cMax)*100), costOK?'var(--olive)':'var(--destructive)',
+      costOK ? 'Within the ≤100 ceiling' : 'Breaches the cost ceiling');
+
+    el.innerHTML = g1+g2+g3+g4;
+  }
+
+  function renderStatus(s){
+    var el = document.getElementById('statusBanner');
+    var effOK = s.effective >= TARGET_EFFECTIVE;
+    var capOK = s.capitalHi <= CAPITAL_ENVELOPE;
+    var qualOK = s.quality <= QUALITY_CEILING;
+    var costOK = s.cost <= COST_CEILING;
+    var allOn = LEVERS.every(function(l){return state[l.id];});
+
+    var cls, msg;
+    if(effOK && capOK && qualOK && costOK){
+      cls='ok';
+      msg = allOn
+        ? '✓ Recommended path — clears the target with a '+fmt(s.effective-TARGET_EFFECTIVE)+'-unit buffer, $'+fmt1(CAPITAL_ENVELOPE-s.capitalHi)+'M held in reserve, quality and cost both improve.'
+        : '✓ Still clears the target with the levers currently on — '+fmt(s.effective-TARGET_EFFECTIVE)+'-unit buffer.';
+    } else if(!effOK){
+      cls='warn';
+      msg = '⚠ Short of the +30% target by '+fmt(TARGET_EFFECTIVE-s.effective)+' effective units with the levers currently on. Turn more levers on, or this is the size of the gap a capital option would need to close.';
+    } else {
+      cls='bad';
+      msg = '✗ A guardrail is breached with this combination — check the quality and cost gauges below.';
+    }
+    el.className = 'status-banner '+cls;
+    el.innerHTML = msg;
+  }
+
+  function renderAll(){
+    var s = computeState();
+    renderLevers();
+    renderBridge();
+    renderGauges(s);
+    renderStatus(s);
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

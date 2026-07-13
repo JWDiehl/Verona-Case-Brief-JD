@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GE Verona — Throughput Scenario File — Slide3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  /* Light theme tokens */
+  --ivory:#F8F4ED;
+  --olive:#6B6B3A;
+  --periwinkle:#7C82E8;
+  --athletic:#D2FF57;
+  --electric-green:#25FF06;
+
+  --bg:#F8F4ED;
+  --fg:#111111;
+  --body-text:#444;
+  --muted:#555;
+
+  --accent-dark:var(--olive);
+  --accent-mid:var(--periwinkle);
+  --accent:var(--athletic);
+
+  --border:#DDD9CF;
+  --card-bg:#EFEBE2;
+  --card-border:#DDD9CF;
+  --surface-raised:#E8E4DB;
+  --warning:#C97C20;
+  --destructive:#B4472B;
+
+  --logo-ink:#000000;
+
+  --font:'Plus Jakarta Sans',system-ui,sans-serif;
+  --radius:6px;
+  --skew-slash:12deg;
+
+  --text-display-xl:3.75rem;
+  --text-display-lg:3rem;
+  --text-display-md:2.25rem;
+  --text-display-sm:1.6rem;
+  --text-body-lg:1.125rem;
+  --text-overline:0.75rem;
+  --tracking-tight:-0.015em;
+  --tracking-wider:0.06em;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--font);}
+body{line-height:1.55;-webkit-font-smoothing:antialiased;}
+
+.s3-logo{height:30px;width:auto;display:block;}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:88vh;
+  padding:64px 7vw 56px;
+  display:flex;flex-direction:column;
+  border-bottom:1px solid var(--border);
+}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+.hero-meta{text-align:right;font-size:12px;color:var(--muted);line-height:1.7;}
+.hero-meta b{color:var(--fg);font-weight:700;}
+.overline{
+  font-size:var(--text-overline);font-weight:700;letter-spacing:var(--tracking-wider);
+  text-transform:uppercase;color:var(--olive);
+}
+.hero-body{margin-top:auto;max-width:980px;}
+.slash-accent{
+  display:inline-block;width:18px;height:42px;margin:0 6px;
+  background:var(--athletic);transform:skewX(-12deg);vertical-align:-6px;
+}
+h1.hero-title{
+  font-size:var(--text-display-xl);font-weight:800;letter-spacing:var(--tracking-tight);
+  line-height:1.04;margin:18px 0 22px;
+}
+.hero-sub{font-size:var(--text-body-lg);color:var(--body-text);max-width:760px;}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px;font-size:12.5px;font-weight:600;color:var(--fg);
+}
+.pill .pdot{width:8px;height:8px;border-radius:50%;background:var(--periwinkle);}
+
+.disclaimer{
+  margin-top:34px;font-size:12px;color:var(--muted);max-width:820px;
+  border-left:3px solid var(--olive);padding:8px 0 8px 14px;background:transparent;
+}
+.audience-note{
+  margin-top:24px;max-width:880px;background:#EEF0FD;border:1px solid var(--periwinkle);
+  border-left:4px solid var(--periwinkle);border-radius:var(--radius);padding:18px 22px;
+}
+.audience-note p{font-size:13.5px;color:var(--body-text);}
+.audience-note b{color:var(--fg);}
+.audience-note-tag{
+  font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--periwinkle);margin-bottom:10px;
+}
+
+/* ---------- CONTENT ---------- */
+.content{max-width:1080px;margin:0 auto;padding:70px 32px 140px;}
+.section{margin-bottom:72px;scroll-margin-top:32px;}
+.sec-num{font-size:12px;font-weight:700;letter-spacing:var(--tracking-wider);color:var(--periwinkle);text-transform:uppercase;}
+.sec-title{
+  font-size:var(--text-display-md);font-weight:800;letter-spacing:var(--tracking-tight);
+  line-height:1.1;margin:6px 0 8px;
+}
+.sec-lede{font-size:var(--text-body-lg);color:var(--body-text);max-width:760px;margin-bottom:26px;}
+p{margin-bottom:14px;color:var(--body-text);}
+.highlight{color:var(--olive);font-weight:700;}
+
+/* cards */
+.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px 24px;}
+.card--white{background:#fff;}
+.card--olive{border-left:3px solid var(--olive);}
+.card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--fg);}
+.card p:last-child{margin-bottom:0;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+
+/* metric */
+.metric{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.metric-value{font-size:2rem;font-weight:800;color:var(--olive);letter-spacing:-0.02em;line-height:1;}
+.metric-value small{font-size:0.95rem;font-weight:700;color:var(--muted);}
+.metric-label{font-size:12px;font-weight:600;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:0.04em;}
+.metric-note{font-size:12px;color:var(--body-text);margin-top:6px;}
+
+/* table */
+.table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0;}
+.table th{
+  background:var(--surface-raised);color:var(--olive);text-align:left;font-weight:700;
+  font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;
+  padding:11px 13px;border-bottom:2px solid var(--olive);
+}
+.table td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--body-text);vertical-align:top;}
+.table tr:last-child td{border-bottom:none;}
+.table tr:hover td{background:#F5F1E8;}
+.table .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.table caption{caption-side:bottom;text-align:left;font-size:11.5px;color:var(--muted);padding-top:8px;font-style:italic;}
+
+/* banner */
+.banner{background:var(--card-bg);border:1px solid var(--olive);border-radius:var(--radius);padding:16px 20px;font-size:14px;}
+.banner--warn{border-color:var(--warning);}
+.banner b{color:var(--fg);}
+
+/* flow */
+.flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;}
+.flow-node{
+  flex:1;min-width:120px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:13px 14px;font-size:12.5px;text-align:center;
+}
+.flow-node .fn-title{font-weight:700;color:var(--fg);display:block;margin-bottom:3px;}
+.flow-node .fn-time{color:var(--periwinkle);font-weight:700;font-size:12px;}
+.flow-arrow{display:flex;align-items:center;color:var(--olive);font-weight:700;font-size:18px;}
+@media(max-width:760px){.flow-arrow{transform:rotate(90deg);justify-content:center;width:100%;}}
+
+/* evidence / numbered */
+.evidence{display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--border);}
+.evidence:last-child{border-bottom:none;}
+.evidence-num{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--periwinkle);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;
+}
+.evidence-label{font-weight:700;color:var(--fg);margin-bottom:2px;}
+.evidence-desc{font-size:13.5px;color:var(--body-text);}
+
+/* two-column board split */
+.board-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:760px){.board-split{grid-template-columns:1fr;}}
+.board-col{border-radius:var(--radius);padding:20px 22px;}
+.board-col--a{background:#EEF0FD;border:1px solid var(--periwinkle);}
+.board-col--b{background:#F2F1E6;border:1px solid var(--olive);}
+.board-col h3{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.board-col .who{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;}
+.board-col--a .who{color:var(--periwinkle);}
+.board-col--b .who{color:var(--olive);}
+.board-col ul{margin:0;padding-left:18px;}
+.board-col li{font-size:13.5px;color:var(--body-text);margin-bottom:7px;}
+
+/* question list */
+.q-list{counter-reset:q;}
+.q-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body-text);}
+.q-item:last-child{border-bottom:none;}
+.q-item::before{
+  counter-increment:q;content:"Q"counter(q);flex-shrink:0;font-weight:700;color:var(--periwinkle);
+  font-size:12.5px;width:30px;
+}
+
+ul.clean{list-style:none;padding:0;}
+ul.clean li{padding:7px 0 7px 22px;position:relative;font-size:14px;color:var(--body-text);border-bottom:1px solid var(--border);}
+ul.clean li:last-child{border-bottom:none;}
+ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;height:10px;background:var(--athletic);transform:skewX(-12deg);}
+
+.subhead{font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--olive);margin:24px 0 12px;}
+
+.footer{max-width:1080px;margin:0 auto;padding:30px 32px 60px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+
+/* progress rail */
+.progress-rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:9000;}
+.progress-rail a{display:flex;align-items:center;gap:8px;text-decoration:none;font:600 11px/1 var(--font);color:var(--muted);transition:color .15s;justify-content:flex-end;}
+.progress-rail a .dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:all .15s;flex-shrink:0;}
+.progress-rail a .txt{opacity:0;transition:opacity .15s;white-space:nowrap;}
+.progress-rail a:hover .txt,.progress-rail a.active .txt{opacity:1;}
+.progress-rail a.active{color:var(--periwinkle);}
+.progress-rail a.active .dot{background:var(--periwinkle);transform:scale(1.5);}
+@media(max-width:1180px){.progress-rail{display:none;}}
+</style>
+</head>
+<body class="page">
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-top">
+    <svg class="s3-logo" viewBox="0 0 248 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Slide3">
+      <text x="0" y="40" font-family="'Arial Black','Arial Bold',Arial,sans-serif" font-weight="900" font-size="48" fill="var(--logo-ink)" letter-spacing="-2.5">SLIDE</text>
+      <polygon points="166,5 181,5 166,45 151,45" fill="#25FF06"/>
+      <polygon points="189,5 204,5 189,45 174,45" fill="#25FF06"/>
+      <polygon points="212,5 227,5 212,45 197,45" fill="#25FF06"/>
+    </svg>
+    <div class="hero-meta">
+      <b>SCENARIO FILE — INTERNAL</b><br>
+      Engagement: GE Verona Throughput Diagnostic<br>
+      Status: Team brief · analysis not started<br>
+      Version 0.1 · prepared for the working team
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <span class="overline">Operations Strategy · Constraint Diagnostic</span>
+    <h1 class="hero-title">Lift throughput 30%<span class="slash-accent"></span>in 30 months —<br>without breaking cost or quality.</h1>
+    <p class="hero-sub">GE Verona's board is split between building a new factory and fixing the plants and order flow it already has. This file gives the working team the situation, the numbers, and the open questions. It deliberately stops short of a diagnosis — the analysis is yours to run.</p>
+    <div class="hero-pills">
+      <span class="pill"><span class="pdot"></span>+30% effective annual throughput</span>
+      <span class="pill"><span class="pdot"></span>30-month horizon</span>
+      <span class="pill"><span class="pdot"></span>Fixed capital envelope</span>
+      <span class="pill"><span class="pdot"></span>Hold quality &amp; unit cost</span>
+    </div>
+    <div class="disclaimer">
+      All figures in this file are <b>fictional and constructed for analysis practice.</b> "GE Verona" is a hypothetical company; the data is internally consistent but invented. Nothing here represents a real organization, and no recommendation is implied. Use these numbers as your starting dataset — pressure-test them, don't trust them.
+    </div>
+
+    <div class="audience-note">
+      <div class="audience-note-tag">Read before you start · Audience</div>
+      <p style="margin:0;"><b>This output is board-level.</b> Your work product goes to senior leadership — directors and executives who own the capital decision but <b>do not carry the operational detail.</b> They will not know what OEE decomposes into, why a 95%-utilized plant can still have slack, or how a fast front office can fail to add throughput. <b>That is your job to explain, not theirs to already know.</b></p>
+      <p style="margin:10px 0 0;">Translate every technical finding into a decision a non-specialist can act on: lead with the takeaway, define the term the first time you use it, and make the "so what" explicit. If a slide needs the reader to already understand the mechanics, it isn't board-ready yet. <b>Assume nothing about what the room knows.</b></p>
+    </div>
+  </div>
+</header>
+
+<nav class="progress-rail" aria-label="Page progress">
+  <a href="#sec-1"><span class="txt">Situation</span><span class="dot"></span></a>
+  <a href="#sec-2"><span class="txt">The decision</span><span class="dot"></span></a>
+  <a href="#sec-3"><span class="txt">The system</span><span class="dot"></span></a>
+  <a href="#sec-4"><span class="txt">Plant data</span><span class="dot"></span></a>
+  <a href="#sec-5"><span class="txt">Order process</span><span class="dot"></span></a>
+  <a href="#sec-6"><span class="txt">Capital &amp; constraints</span><span class="dot"></span></a>
+  <a href="#sec-7"><span class="txt">Demand</span><span class="dot"></span></a>
+  <a href="#sec-8"><span class="txt">Open questions</span><span class="dot"></span></a>
+  <a href="#sec-9"><span class="txt">Your task</span><span class="dot"></span></a>
+</nav>
+
+<main class="content">
+
+  <!-- 1. SITUATION -->
+  <section class="section" id="sec-1">
+    <div class="sec-num">01 — Situation</div>
+    <h2 class="sec-title">A profitable mid-cap industrial that has run out of headroom.</h2>
+    <p class="sec-lede">GE Verona manufactures precision rotating-equipment assemblies (industrial pumps and compressor units) for energy, water, and process-industry customers. Demand is strong and the order book is growing, but the company is increasingly quoting lead times it cannot reliably hit.</p>
+
+    <div class="grid4" style="margin-bottom:22px;">
+      <div class="metric"><div class="metric-value">$540<small>M</small></div><div class="metric-label">Annual revenue</div></div>
+      <div class="metric"><div class="metric-value">3</div><div class="metric-label">Manufacturing plants</div></div>
+      <div class="metric"><div class="metric-value">~48k</div><div class="metric-label">Units shipped / yr</div></div>
+      <div class="metric"><div class="metric-value">14.2<small>wk</small></div><div class="metric-label">Avg. order-to-ship lead time</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card card--olive">
+        <h3>What's going well</h3>
+        <p>Order intake is up roughly 9% year-on-year and the sales pipeline is the strongest in a decade. Gross margins are healthy at ~34%. Quality, measured by field-return rate, sits at 1.8% — a number the company markets on.</p>
+      </div>
+      <div class="card card--olive">
+        <h3>What's hurting</h3>
+        <p>On-time delivery has slipped from 94% to 81% over six quarters. The plants are quoting 14+ week lead times against a market norm of 9–10. Two large framework customers have put renewals "under review," citing reliability.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;">The CEO's mandate is blunt: <span class="highlight">lift effective annual throughput by 30% within 30 months</span> — enough to recover delivery performance and absorb the growing book — <span class="highlight">without compromising the 1.8% quality number and without letting unit cost creep up.</span> "Effective" throughput is defined as units shipped on-time-in-full, not units produced.</p>
+  </section>
+
+  <!-- 2. THE DECISION -->
+  <section class="section" id="sec-2">
+    <div class="sec-num">02 — The decision on the table</div>
+    <h2 class="sec-title">The board is split two ways — and that split is the reason Slide3 was engaged.</h2>
+    <p class="sec-lede">Both camps agree on the 30% target. They disagree on where the throughput will come from. Neither side has yet established where the true constraint actually sits.</p>
+
+    <div class="board-split">
+      <div class="board-col board-col--a">
+        <div class="who">Camp A · "Build capacity"</div>
+        <h3>Pour capital into a new factory</h3>
+        <ul>
+          <li>Believes the plants are physically maxed out and no amount of process work creates 30% more capacity.</li>
+          <li>Proposes a fourth plant (greenfield or major expansion of Plant&nbsp;2).</li>
+          <li>Argues a new line lets the company hold quality by not overloading existing equipment.</li>
+          <li>Concern from the other camp: high capital cost, long build time, risk of building capacity the constraint isn't in.</li>
+        </ul>
+      </div>
+      <div class="board-col board-col--b">
+        <div class="who">Camp B · "Fix what we have"</div>
+        <h3>Squeeze the plants &amp; fix order management</h3>
+        <ul>
+          <li>Believes throughput is lost to process friction, not physical limits — long changeovers, WIP pileups, and a slow front office.</li>
+          <li>Points to the order-management process as a hidden bottleneck before parts are even cut.</li>
+          <li>Argues capital should go to debottlenecking and systems, not concrete.</li>
+          <li>Concern from the other camp: incremental gains may not reach 30%; "fixing process" is harder to guarantee on a board timeline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:20px;">
+      <b>Slide3's brief:</b> diagnose the <b>true constraint</b>, then recommend an operational path to +30% effective throughput within 30 months and the capital envelope. The deliverable is a defensible diagnosis — not a vote for whichever camp is louder.
+    </div>
+  </section>
+
+  <!-- 3. THE SYSTEM -->
+  <section class="section" id="sec-3">
+    <div class="sec-num">03 — The system at a glance</div>
+    <h2 class="sec-title">From a customer order to a shipped unit, the work crosses two worlds.</h2>
+    <p class="sec-lede">Throughput is gated by the whole chain — the front-office order process and the physical shop floor. A unit cannot ship faster than the slowest stage it passes through. The team's first job is to find that stage.</p>
+
+    <div class="subhead">End-to-end value stream (representative timeline for a standard order)</div>
+    <div class="flow" style="margin-bottom:10px;">
+      <div class="flow-node"><span class="fn-title">Order entry &amp; config</span><span class="fn-time">~3.5 wk</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><span class="fn-title">Engineering &amp; release</span><span class="fn-time">~2.0 wk</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><span class="fn-title">Material &amp; scheduling</span><span class="fn-time">~1.8 wk</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node flow-node"><span class="fn-title">Machining &amp; fab</span><span class="fn-time">~3.2 wk</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><span class="fn-title">Assembly &amp; test</span><span class="fn-time">~2.4 wk</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><span class="fn-title">Ship</span><span class="fn-time">~1.3 wk</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);font-style:italic;">Stage times shown are average elapsed (queue + touch) time, not value-added touch time. The two differ a lot — see Section 5.</p>
+
+    <div class="banner banner--warn" style="margin-top:18px;">
+      <b>Watch-out for the team:</b> elapsed time per stage is <b>not</b> the same as where capacity is constrained. A stage can be slow because it's genuinely capacity-limited, or because work piles up in queue ahead of it. Distinguishing the two is the core of the diagnosis.
+    </div>
+  </section>
+
+  <!-- 4. PLANT DATA -->
+  <section class="section" id="sec-4">
+    <div class="sec-num">04 — The three plants</div>
+    <h2 class="sec-title">Three plants, three different stories.</h2>
+    <p class="sec-lede">The plants are not interchangeable. They run different product mixes, different equipment ages, and very different utilization profiles. Aggregate numbers hide this — the team should resist averaging.</p>
+
+    <table class="table">
+      <caption>Table 4.1 — Plant operating profile, trailing 12 months (fictional data).</caption>
+      <thead>
+        <tr><th>Metric</th><th class="num">Plant 1 (Verona)</th><th class="num">Plant 2 (Brescia)</th><th class="num">Plant 3 (Padua)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Primary product line</td><td class="num">Standard pumps</td><td class="num">Compressor units</td><td class="num">Mixed / custom</td></tr>
+        <tr><td>Units shipped / yr</td><td class="num">23,400</td><td class="num">14,800</td><td class="num">9,800</td></tr>
+        <tr><td>Floor capacity (units/yr, nameplate)</td><td class="num">26,000</td><td class="num">15,500</td><td class="num">17,000</td></tr>
+        <tr><td>Reported utilization</td><td class="num">90%</td><td class="num">95%</td><td class="num">58%</td></tr>
+        <tr><td>Bottleneck cell (internal)</td><td class="num">CNC machining</td><td class="num">Final test</td><td class="num">Assembly labor</td></tr>
+        <tr><td>OEE at bottleneck cell</td><td class="num">71%</td><td class="num">64%</td><td class="num">52%</td></tr>
+        <tr><td>Avg. changeover time (bottleneck)</td><td class="num">95 min</td><td class="num">140 min</td><td class="num">60 min</td></tr>
+        <tr><td>Changeovers / day (bottleneck)</td><td class="num">6</td><td class="num">4</td><td class="num">9</td></tr>
+        <tr><td>WIP (avg units on floor)</td><td class="num">1,950</td><td class="num">2,400</td><td class="num">540</td></tr>
+        <tr><td>Unplanned downtime (% of run time)</td><td class="num">8%</td><td class="num">15%</td><td class="num">6%</td></tr>
+        <tr><td>Skilled-labor vacancy rate</td><td class="num">4%</td><td class="num">7%</td><td class="num">22%</td></tr>
+        <tr><td>Field-return (quality) rate</td><td class="num">1.5%</td><td class="num">2.4%</td><td class="num">1.6%</td></tr>
+        <tr><td>Unit cost index (100 = company avg)</td><td class="num">94</td><td class="num">108</td><td class="num">103</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid3" style="margin-top:20px;">
+      <div class="card card--white"><h3>Plant 1 — Verona</h3><p>The volume engine. Runs near nameplate but OEE at the CNC cell suggests run-time losses. Low cost, good quality. Little obvious slack — unless OEE is the lever.</p></div>
+      <div class="card card--white"><h3>Plant 2 — Brescia</h3><p>Reportedly the most "maxed out," but high downtime, long changeovers, and the worst quality and unit cost. Is it truly full, or full of friction?</p></div>
+      <div class="card card--white"><h3>Plant 3 — Padua</h3><p>Sits at 58% utilization with a big labor vacancy. Idle capacity on paper — but is it the right capacity for the demand mix, and can it be staffed?</p></div>
+    </div>
+
+    <div class="banner" style="margin-top:18px;">
+      <b>Note on OEE:</b> Overall Equipment Effectiveness = Availability × Performance × Quality. A bottleneck cell at 64% OEE has meaningful theoretical recovery before any new equipment is bought — but recovering it is an operational program, not a guarantee. The team should decompose OEE before treating it as free throughput.
+    </div>
+  </section>
+
+  <!-- 5. ORDER PROCESS -->
+  <section class="section" id="sec-5">
+    <div class="sec-num">05 — The order-management process</div>
+    <h2 class="sec-title">Half the lead time is consumed before a single part is cut.</h2>
+    <p class="sec-lede">Camp B's claim rests here. Of the ~14.2-week average lead time, roughly 7.3 weeks elapse in the front office (order entry, engineering, scheduling) before material is even released. The team should test whether this is a capacity constraint, a policy constraint, or both.</p>
+
+    <table class="table">
+      <caption>Table 5.1 — Front-office stage analysis: elapsed vs. touch time (fictional data).</caption>
+      <thead>
+        <tr><th>Stage</th><th class="num">Avg elapsed</th><th class="num">Value-added touch time</th><th class="num">% in queue / rework</th><th class="num">Primary cause cited</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Order entry &amp; configuration</td><td class="num">3.5 wk</td><td class="num">4 hrs</td><td class="num">~96%</td><td>Manual config checks, missing customer specs</td></tr>
+        <tr><td>Engineering &amp; drawing release</td><td class="num">2.0 wk</td><td class="num">9 hrs</td><td class="num">~89%</td><td>Engineer queue; custom revisions</td></tr>
+        <tr><td>Material &amp; scheduling</td><td class="num">1.8 wk</td><td class="num">3 hrs</td><td class="num">~92%</td><td>Batch scheduling cadence (weekly)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid2" style="margin-top:20px;">
+      <div class="card">
+        <h3>Where the front office friction shows up</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>~30% of orders need at least one round of clarification with the customer or sales before they can be configured.</li>
+          <li>Engineering is a shared pool of 11 engineers serving all three plants with no triage between standard and custom work.</li>
+          <li>Production scheduling runs on a weekly batch release — an order that misses the Friday cutoff waits.</li>
+          <li>There is no single owner of an order end-to-end; it changes hands 6+ times.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What the data does <i>not</i> yet tell you</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>Whether front-office delay actually <i>limits shipped units</i>, or just lengthens lead time on units that ship anyway.</li>
+          <li>How much of the 30% clarification rate is standard vs. custom orders.</li>
+          <li>Whether faster order release would simply move the queue downstream onto the plant bottleneck.</li>
+          <li>The true demand the system would see if lead times were competitive (see Section 7).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner banner--warn" style="margin-top:18px;">
+      <b>Classic trap:</b> speeding up a non-constraint feels productive but adds no throughput — it just grows WIP in front of the real constraint. Before recommending order-process fixes, establish whether the front office is <b>the</b> constraint or merely <b>a</b> delay.
+    </div>
+  </section>
+
+  <!-- 6. CAPITAL & CONSTRAINTS -->
+  <section class="section" id="sec-6">
+    <div class="sec-num">06 — Capital envelope &amp; hard constraints</div>
+    <h2 class="sec-title">The path must fit inside a fixed envelope and three non-negotiables.</h2>
+    <p class="sec-lede">Whatever the team recommends has to live within these boundaries. They are the guardrails for any scenario.</p>
+
+    <div class="grid4" style="margin-bottom:24px;">
+      <div class="metric"><div class="metric-value">$48<small>M</small></div><div class="metric-label">Total capital envelope</div><div class="metric-note">Across the full 30 months</div></div>
+      <div class="metric"><div class="metric-value">30<small>mo</small></div><div class="metric-label">Time to target</div><div class="metric-note">Effective, not just installed</div></div>
+      <div class="metric"><div class="metric-value">≤1.8%</div><div class="metric-label">Quality ceiling</div><div class="metric-note">Field-return rate must not rise</div></div>
+      <div class="metric"><div class="metric-value">≤100</div><div class="metric-label">Unit-cost index</div><div class="metric-note">No net increase vs. today</div></div>
+    </div>
+
+    <div class="subhead">Reference cost &amp; timing assumptions (fictional, for option-sizing)</div>
+    <table class="table">
+      <caption>Table 6.1 — Illustrative cost and lead-time inputs the team can use or challenge.</caption>
+      <thead>
+        <tr><th>Lever</th><th class="num">Indicative capital</th><th class="num">Time to effect</th><th class="num">Notes / risk</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>New greenfield plant (Plant 4)</td><td class="num">$60–75M</td><td class="num">28–36 mo</td><td>Exceeds envelope alone; build risk; right capacity?</td></tr>
+        <tr><td>Major expansion of Plant 2</td><td class="num">$28–34M</td><td class="num">18–24 mo</td><td>Adds capacity to the lowest-quality, highest-cost plant</td></tr>
+        <tr><td>Debottleneck Plant 1 CNC cell</td><td class="num">$6–9M</td><td class="num">6–10 mo</td><td>Targets OEE recovery; depends on root cause</td></tr>
+        <tr><td>Changeover / SMED program (all plants)</td><td class="num">$1–2M</td><td class="num">4–9 mo</td><td>Low capital, high labor-discipline dependency</td></tr>
+        <tr><td>Staff &amp; ramp Plant 3 idle capacity</td><td class="num">$3–5M</td><td class="num">9–15 mo</td><td>22% vacancy; labor market is the constraint</td></tr>
+        <tr><td>Order-management system + redesign</td><td class="num">$4–7M</td><td class="num">9–14 mo</td><td>Benefit depends on whether front office is the constraint</td></tr>
+        <tr><td>Engineering triage / pooling redesign</td><td class="num">$0.5–1M</td><td class="num">3–6 mo</td><td>Mostly process &amp; org, not capital</td></tr>
+      </tbody>
+    </table>
+
+    <div class="banner" style="margin-top:18px;">
+      <b>Implication to test, not assume:</b> the single largest options (new plant, Plant 2 expansion) either bust or nearly consume the envelope on their own, while several process levers are cheap. Whether cheap levers <i>sum</i> to +30% effective throughput is exactly what the analysis must determine.
+    </div>
+  </section>
+
+  <!-- 7. DEMAND -->
+  <section class="section" id="sec-7">
+    <div class="sec-num">07 — Demand &amp; mix</div>
+    <h2 class="sec-title">Throughput only matters against the demand it has to serve.</h2>
+    <p class="sec-lede">A 30% throughput lift is only valuable if the demand is real and the mix matches the capacity. The team should sanity-check the target against the order book before optimizing the factory.</p>
+
+    <div class="grid2">
+      <div class="card card--white">
+        <h3>Demand signal</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>Order intake up ~9% YoY; backlog has grown from 6 to 11 weeks of shipments.</li>
+          <li>Lost-order analysis suggests ~$40M of annual revenue declined or lost to lead time in the last year.</li>
+          <li>Two framework customers (~18% of revenue combined) tie renewal to on-time delivery recovery.</li>
+        </ul>
+      </div>
+      <div class="card card--white">
+        <h3>Mix considerations</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>~62% of volume is standard product; ~38% is custom or semi-custom (which loads engineering hardest).</li>
+          <li>Custom orders carry higher margin but disproportionate front-office and changeover cost.</li>
+          <li>Plant 3's idle capacity is configured mostly for custom/mixed work — not the standard volume that's most backed up.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="table" style="margin-top:20px;">
+      <caption>Table 7.1 — Demand vs. effective capacity, today and at target (fictional data).</caption>
+      <thead>
+        <tr><th>Measure</th><th class="num">Today</th><th class="num">+30% target</th><th class="num">Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Effective annual throughput (OTIF units)</td><td class="num">~39,000</td><td class="num">~50,700</td><td class="num">+11,700</td></tr>
+        <tr><td>Units shipped (incl. late)</td><td class="num">48,000</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>On-time-in-full rate</td><td class="num">81%</td><td class="num">≥94%</td><td class="num">+13 pts</td></tr>
+        <tr><td>Demand at competitive lead time (est.)</td><td class="num">~52,000</td><td class="num">—</td><td class="num">latent</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--muted);font-style:italic;margin-top:8px;">Note the distinction the CEO drew: the gap to close is in <i>effective</i> (on-time) throughput, ~11,700 units — part of which may be recoverable by shipping existing production on time rather than producing more.</p>
+  </section>
+
+  <!-- 8. OPEN QUESTIONS -->
+  <section class="section" id="sec-8">
+    <div class="sec-num">08 — Open questions for the team</div>
+    <h2 class="sec-title">The questions the analysis needs to answer.</h2>
+    <p class="sec-lede">These are unanswered on purpose. They are the spine of the diagnostic — not a checklist of conclusions.</p>
+
+    <div class="q-list">
+      <div class="q-item">Where is the <b>true system constraint</b> — front office, a specific plant cell, labor, or material? Is there one constraint or a moving one?</div>
+      <div class="q-item">How much of the gap is <b>recoverable throughput</b> (OEE, changeover, OTIF) vs. genuinely <b>new capacity</b> that must be built or staffed?</div>
+      <div class="q-item">Does the +30% <b>effective</b> target require +30% <b>produced</b> units, or can on-time recovery close part of it with existing output?</div>
+      <div class="q-item">If the front office is sped up, does throughput rise — or does WIP just relocate to a downstream plant bottleneck?</div>
+      <div class="q-item">Is Plant 2 truly capacity-maxed, or is its 95% utilization masking downtime, changeover, and quality losses?</div>
+      <div class="q-item">Can Plant 3's idle capacity be staffed given a 22% vacancy rate, and does its configuration match the backed-up demand mix?</div>
+      <div class="q-item">Which combination of levers fits inside <b>$48M and 30 months</b> while holding quality ≤1.8% and unit cost ≤100?</div>
+      <div class="q-item">What's the <b>sequencing</b> — which levers must come first because later ones depend on them, and which buy time?</div>
+      <div class="q-item">What are the leading <b>KRIs / early signals</b> that would tell the board at month 6 whether the chosen path is working?</div>
+      <div class="q-item">What does the analysis need that this file does <b>not</b> contain — and how would the team get it?</div>
+    </div>
+  </section>
+
+  <!-- 9. YOUR TASK -->
+  <section class="section" id="sec-9">
+    <div class="sec-num">09 — Your task</div>
+    <h2 class="sec-title">What to produce — and what this file deliberately leaves to you.</h2>
+    <p class="sec-lede">This scenario file is the starting dataset, not the answer. Use it to run your own constraint diagnosis and build a defensible path.</p>
+
+    <div class="grid2">
+      <div class="card card--olive">
+        <h3>Suggested deliverables</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>A diagnosis of the true constraint, with the evidence that rules out the alternatives.</li>
+          <li>A throughput bridge: today → +30% effective, broken into recovery vs. new capacity.</li>
+          <li>A sequenced 30-month operational path that fits the $48M envelope.</li>
+          <li>The board recommendation: build, fix, or a specific blend — and why.</li>
+          <li>Risks, dependencies, and month-6 leading indicators.</li>
+        </ul>
+      </div>
+      <div class="card card--olive">
+        <h3>Useful frameworks to reach for</h3>
+        <ul class="clean" style="margin-top:4px;">
+          <li>Theory of Constraints — identify, exploit, subordinate, elevate.</li>
+          <li>Value-stream mapping — elapsed vs. value-added time across the chain.</li>
+          <li>OEE decomposition — availability × performance × quality.</li>
+          <li>Little's Law — WIP, throughput, and lead-time relationships.</li>
+          <li>Capital option sizing against the envelope and timeline.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:22px;">
+      <b>Ground rule:</b> let the data pick the constraint before you pick a camp. The board split (build vs. fix) is a hypothesis to test, not a menu to choose from. A strong answer might be neither, or both in sequence.
+    </div>
+
+    <div class="card card--olive" style="margin-top:20px;">
+      <h3>The bar: board-level quality</h3>
+      <p style="margin-bottom:10px;">The deliverable will be read by senior leaders who own the decision but not the detail. It is judged on whether <b>a smart non-specialist can follow the logic and act on it</b> — not on how sophisticated the analysis looks.</p>
+      <ul class="clean" style="margin-top:4px;">
+        <li><b>Lead with the answer.</b> Every page opens with the takeaway; the supporting analysis sits underneath, not in front.</li>
+        <li><b>Define before you use.</b> Spell out OEE, OTIF, constraint, WIP the first time — assume the room has not seen them.</li>
+        <li><b>Always answer "so what."</b> Tie each finding to a dollar, a unit, a week, or a decision the board can make.</li>
+        <li><b>One idea per page.</b> If a leader needs prior context to understand a slide, it is not board-ready yet.</li>
+        <li><b>Recommendation up front.</b> State what you'd do and why in plain language before the evidence trail.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <b>Slide3 · GE Verona Throughput Scenario File · v0.1</b><br>
+  Prepared as working-team material for independent analysis. All figures are fictional and constructed for this exercise; "GE Verona" is hypothetical. This file frames the problem and supplies a starting dataset — it intentionally contains no diagnosis or recommendation.
+</footer>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.progress-rail a'));
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active');});
+        if(map[e.target.id])map[e.target.id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  links.forEach(function(a){
+    var t=document.getElementById(a.getAttribute('href').slice(1));
+    if(t)io.observe(t);
+    a.addEventListener('click',function(ev){
+      ev.preventDefault();
+      if(t)t.scrollIntoView({behavior:'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
