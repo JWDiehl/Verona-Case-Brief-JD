@@ -68,7 +68,7 @@ All figures below are derived from the scenario file's own numbers and cross-che
 
 **Unit cost:** blended cost index improves from ~100.2 today to ~97.1 — better utilization spreads fixed cost across more units, and Plant 2's cost problem is addressed directly rather than diluted across a bigger footprint.
 
-**Handoff to D:** the model shows the +30% target is achievable through recoverable throughput and targeted staffing — without a new plant and without expanding Plant 2 — with a ~2% buffer and a large unused capital reserve.
+**Handoff to D:** the model shows the +30% target is achievable through recoverable throughput and targeted staffing — without a new plant and without expanding Plant 2 — with a ~1.8% buffer and a large unused capital reserve.
 
 ---
 
@@ -86,6 +86,28 @@ Before locking the recommendation, we stress-tested it from both camps' point of
 
 ### Final recommendation
 
-**Do not build a fourth plant. Do not expand Plant 2.** Pursue a five-step, 30-month operational path — front-office/OTIF recovery, Plant 1 debottleneck, Plant 2 friction fix, Plant 3 staffing and mix ramp — using $14.5–24M of the $48M envelope, holding $24–33.5M in reserve for contingency. This clears the +30% effective throughput target with a small buffer, improves quality and unit cost rather than merely holding them, and is fully reversible/adjustable at the month-6 checkpoint if any single lever underperforms.
+**Do not build a fourth plant. Do not expand Plant 2.** Pursue a four-lever, 30-month operational path — front-office/OTIF recovery, Plant 1 debottleneck, Plant 2 friction fix, Plant 3 staffing and mix ramp — using $14.5–24M of the $48M envelope, holding $24–33.5M in reserve for contingency. This clears the +30% effective throughput target with a small buffer, improves quality and unit cost rather than merely holding them, and is fully reversible/adjustable at the month-6 checkpoint if any single lever underperforms.
 
 Full sequencing, risks, and month-6 KRIs are in the interactive brief (`site/index.html`, sections 06–08).
+
+---
+
+## Round 2 — closing the gaps (post-launch review)
+
+After the board page shipped, a review against the original scenario brief found one substantive gap and two copy bugs: the demand-side business case above (§B) never made it onto the actual board page; the "~2% buffer" language (here and on the page) was a rounding error — 906/50,700 is 1.8%, not 2%; and the hero line's "five-step" wording named only four items. A second pass — the same four personas, run independently, plus an adversarial red-team ruling — closed these out before touching `site/index.html`.
+
+**B — Business (re-pass):** the $40M/yr revenue-at-risk and the two framework-customer renewals tied to OTIF recovery are real stakes that belong on the page itself, not just in this workpaper — a board approving $14.5–24M should see what's at risk in dollars, not just OEE points. Also flagged: the mix/margin tension (38% custom work re-clogs the same queue the front-office fix clears, absent a routing rule favoring standard orders through recovered capacity) and a timing risk (if either customer's renewal decision lands before month 6–9, the fix won't have proven out yet).
+
+**M — Ops (re-pass):** two findings worth keeping. First, Plant 2's nameplate isn't a hard physical ceiling — it was rated under today's 140-minute-changeover, 15%-downtime regime, so a modest stretch above it is a fair assumption once those inputs change, not a red flag on its own (validate with the Wave 0 time-motion study as already planned). Second, and more important: Plant 3's ramp is gated by hiring/training, which has a longer lead time than any capital fix in this plan — it should start immediately, in parallel with the front-office rollout, not wait for Wave 2. Waiting costs the plan its longest lever the most time.
+
+**A — Analytics (re-pass, critical finding):** re-ran the full model. The 1.59% quality blend and 97.1 cost index both check out exactly. But the "~2% buffer" framing hid something: if Plant 3's lever alone fails to land — the other three succeed — produced total is 51,400 and effective throughput is 51,400 × 0.94 = **48,316, a 4.7% miss on the 50,700 target**, not a buffer erosion. Plant 3 supplies 3,500 of the plan's 6,900-unit gross lift (over half) and carries the longest time-to-effect (tied with Plant 2 at up to 15 months) — it is the plan's real single point of failure, even though it was narratively framed as "comfortable headroom" (78% utilization even after the ramp) while the risk-flag language went to Plant 2's smaller nameplate stretch instead. The board page understated this.
+
+**D — Decision (re-pass):** the deliverable ended on a Methodology section — an audit footnote, not something a board votes on. There was no explicit statement of what's being approved *today* versus deferred to month 6. Separately: toggling Plant 3 off in the live simulator produced generic copy ("this is the size of the gap a capital option would need to close") that hands Camp A a talking point mid-meeting with no rebuttal on the page.
+
+### Red-team ruling
+
+**Camp A's steelman, reheard:** "If 51% of the lift rides on one lever — hiring and mix conversion — where's the hedge?" **Ruling: the recommendation holds. No plant, no expansion.** A new plant takes years and capital far beyond the $24–33.5M reserve; it cannot close a gap that opens at month 6–9. The real hedge already exists — redirect reserve capital toward accelerating Plant 1/Plant 2 further if Plant 3 slips. Camp A's actual ask isn't a plant, it's that the plan stop understating Plant 3's risk. Granted.
+
+**Camp B, overruled on scope:** several proposed additions were cut as too granular for a one-sitting board page — a two-tranche split of the Plant 2 lever, a request for actual customer renewal dates and a full account-level KRI system (real, but a data-gathering action item, not page content), and a standalone quality-hold-gate callout (folded into the existing Plant 2 risk line instead).
+
+**Locked changes made to `site/index.html`:** (1) corrected the buffer stat to 1.8%; (2) reordered §08's risk list so Plant 3's quantified downside (48,316 / −4.7%) leads, with Plant 2's nameplate stretch second; (3) moved Plant 3 hiring to start in Wave 1, parallel with the front office, in the §06 roadmap; (4) added a "Decision requested today" closing section so the page ends on an explicit ask, not methodology; (5) added a counter-banner in the live simulator that appears only when Plant 3 is toggled off, naming the gap as people-and-mix, not space. Plus three free edits: the recommendation's column is now labeled "Fix, verify, then decide"; the OEE glossary entry now clarifies it's a diagnostic ratio, not a multiplier that derives produced units; and a compact demand/business-case callout (the $40M revenue risk, the two customer renewals, and the ~52,000-unit demand ceiling vs. the 50,700 target) now sits near the top of §01.

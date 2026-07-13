@@ -58,6 +58,21 @@ quality blend  = (25,700×1.4 + 15,900×1.9 + 13,300×1.6) / 54,900 = 1.59%   (c
 cost blend     = (25,700×92 + 15,900×102 + 13,300×101) / 54,900 = 97.1     (ceiling ≤100 ✓)
 ```
 
+## Downside case: what if Plant 3 alone misses its ramp?
+
+The headline buffer (+906 units, ~1.8%) looks like margin against the 50,700 target — but it isn't evenly distributed risk. Plant 3 supplies 3,500 of the plan's 6,900-unit gross lift (over half) and has the longest time-to-effect of any lever (9–15 months, tied with Plant 2). If the other three levers land on time but Plant 3's staffing/mix ramp does not:
+
+```
+produced_total = 25,700 (P1, on) + 15,900 (P2, on) + 9,800 (P3, baseline — unchanged) = 51,400
+effective      = 51,400 × 0.94 = 48,316
+vs. target 50,700 → −2,384 units (−4.7% miss, not a buffer erosion)
+
+quality blend  = (25,700×1.4 + 15,900×1.9 + 9,800×1.6) / 51,400 = 1.59%   (essentially unchanged — P3's quality effect was flat)
+cost blend     = (25,700×92 + 15,900×102 + 9,800×103) / 51,400 = 97.19    (slightly worse — P3's cost improvement is lost)
+```
+
+Plant 3 is narratively framed as "comfortable headroom" (78% utilized even after the ramp) while the risk-flag language in the roundtable went to Plant 2's smaller nameplate stretch — but on the numbers, Plant 3 is the plan's actual single point of failure. This is why Plant 3's hiring now starts in Wave 1, parallel with the front-office rollout, rather than waiting for Wave 2: labor lead times are the longest pole in the plan, so the riskiest lever gets the longest runway to recover if it slips.
+
 ## The one assumption most worth pressure-testing
 
 Plant 2's post-fix produced figure (15,900) sits ~2.5% above its stated nameplate (15,500). The model treats this as legitimate because nameplate figures in the scenario data are almost certainly derived from *observed* output under today's changeover/downtime regime — not a theoretical engineering maximum. A real SMED and reliability program should lift the practical ceiling by roughly the amount of time it recovers. This is flagged in the roundtable doc as the top candidate for a rapid time-and-motion study in Wave 0, before capital is committed to Wave 2.
