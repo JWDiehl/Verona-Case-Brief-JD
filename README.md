@@ -21,11 +21,13 @@ ge-verona-case-brief/
 
 **In VSCode:** open this folder, install the **Live Server** extension, right-click `site/index.html` → "Open with Live Server" for auto-reload while you edit.
 
-## The centerpiece
+## The two interactive centerpieces
 
-Section 03 of the brief ("The interactive throughput bridge") is a live simulator — toggle any of the four recommended levers off and the projected throughput, capital spend, quality rate, and unit-cost index all recompute in real time. This is meant to be used live in the board meeting: if someone asks "what if we don't fund Plant 3 staffing," toggle it off and show them.
+**Section 03 — "Explore the constraint chain"**: an expandable tree (front-office stages / plants) where every row breaks into value-added vs. friction, with toggleable legend chips and live search. Click a branch open, isolate "friction" to see where the losses concentrate, or search a plant name. (The interaction pattern — expand-in-place tree, stacked composition bar, isolate-on-click legend chips — was adapted from an unrelated internal org-exploration tool; none of that tool's data is used here.)
 
-The model behind it is fully documented in `docs/data-model.md` — nothing in the simulator is a black box.
+**Section 04 — "The interactive throughput bridge"**: a live simulator — toggle any of the four recommended levers off and the projected throughput, capital spend, quality rate, and unit-cost index all recompute in real time. This is meant to be used live in the board meeting: if someone asks "what if we don't fund Plant 3 staffing," toggle it off and show them.
+
+Both are fully documented in `docs/data-model.md` — nothing in either is a black box.
 
 ## Pushing to GitHub
 

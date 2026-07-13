@@ -189,6 +189,46 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
 .q-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body-text);}
 .q-item:last-child{border-bottom:none;}
 .q-item::before{counter-increment:q;content:"Q"counter(q);flex-shrink:0;font-weight:700;color:var(--periwinkle);font-size:12.5px;width:30px;}
+
+/* ---------- drill-down constraint-chain explorer ---------- */
+.dz-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+.dz-search{position:relative;}
+.dz-search input{border:1px solid var(--border);border-radius:999px;padding:8px 30px 8px 32px;font-size:12.5px;width:220px;outline:none;background:#fff;color:var(--fg);}
+.dz-search input:focus{border-color:var(--periwinkle);}
+.dz-search .mag{position:absolute;left:12px;top:8px;color:var(--muted);font-size:13px;}
+.dz-search .clr{position:absolute;right:9px;top:6px;border:0;background:none;color:var(--muted);cursor:pointer;font-size:13px;display:none;padding:2px;}
+.dz-search.has .clr{display:block;}
+.dz-tbtn{border:1px solid var(--border);background:#fff;border-radius:999px;padding:7px 14px;font-size:11.5px;font-weight:700;color:var(--muted);cursor:pointer;}
+.dz-tbtn:hover{color:var(--fg);border-color:var(--periwinkle);}
+.dz-legend{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
+.dz-chip{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;color:#fff;padding:6px 12px;cursor:pointer;font-size:11.5px;font-weight:700;transition:background .15s,color .15s;}
+.dz-chip.off{background:#DDD9CF !important;color:#7a756d;}
+.dz-thead{position:sticky;top:0;background:#fff;z-index:5;display:grid;grid-template-columns:280px 1fr 96px;gap:14px;align-items:center;padding:9px 8px;border-bottom:2px solid var(--fg);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+.dz-tree{margin-top:2px;}
+.dz-row{display:grid;grid-template-columns:280px 1fr 96px;gap:14px;align-items:center;padding:6px 8px;border-radius:8px;cursor:pointer;}
+.dz-row:hover{background:#F8F6F0;}
+.dz-row.leaf{cursor:default;}
+.dz-row.leaf:hover{background:none;}
+.dz-lab{display:flex;align-items:center;gap:7px;min-width:0;}
+.dz-chev{flex:none;width:13px;text-align:center;color:var(--periwinkle);font-size:10px;display:inline-block;transition:transform .15s ease;}
+.dz-chev.open{transform:rotate(90deg);}
+.dz-chev.none{color:transparent;}
+.dz-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;}
+.dz-row.d0 .dz-nm{font-weight:700;}
+.dz-row.d1 .dz-nm{font-weight:500;color:#3f3b36;font-size:12.5px;}
+.dz-nm .dz-hit{background:#EEF0FD;border-radius:4px;padding:0 2px;color:var(--periwinkle);}
+.dz-stack{display:flex;border-radius:5px;overflow:hidden;background:#EFEBE2;height:20px;}
+.dz-row.d1 .dz-stack{height:16px;}
+.dz-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;transition:opacity .2s ease;}
+.dz-seg.eff{background:var(--olive);}
+.dz-seg.fric{background:var(--warning);}
+.dz-size{font-size:12px;font-weight:700;text-align:right;color:var(--fg);white-space:nowrap;}
+.dz-kids{display:grid;grid-template-rows:0fr;transition:grid-template-rows .18s ease;}
+.dz-kids.open{grid-template-rows:1fr;}
+.dz-kids-inner{overflow:hidden;min-height:0;}
+.dz-kids-inner .dz-pad{border-left:2px solid var(--border);margin-left:16px;padding-left:8px;}
+.dz-hint{color:var(--muted);font-size:11.5px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+@media(max-width:820px){.dz-thead,.dz-row{grid-template-columns:150px 1fr 66px;gap:8px;}}
 </style>
 </head>
 <body class="page">
@@ -229,12 +269,13 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
 <nav class="progress-rail" aria-label="Page progress">
   <a href="#sec-1"><span class="txt">Recommendation</span><span class="dot"></span></a>
   <a href="#sec-2"><span class="txt">Diagnosis</span><span class="dot"></span></a>
-  <a href="#sec-3"><span class="txt">Interactive bridge</span><span class="dot"></span></a>
-  <a href="#sec-4"><span class="txt">Plant evidence</span><span class="dot"></span></a>
-  <a href="#sec-5"><span class="txt">30-month roadmap</span><span class="dot"></span></a>
-  <a href="#sec-6"><span class="txt">Capital & guardrails</span><span class="dot"></span></a>
-  <a href="#sec-7"><span class="txt">Risks & KRIs</span><span class="dot"></span></a>
-  <a href="#sec-8"><span class="txt">Methodology</span><span class="dot"></span></a>
+  <a href="#sec-3"><span class="txt">Explore the chain</span><span class="dot"></span></a>
+  <a href="#sec-4"><span class="txt">Interactive bridge</span><span class="dot"></span></a>
+  <a href="#sec-5"><span class="txt">Plant evidence</span><span class="dot"></span></a>
+  <a href="#sec-6"><span class="txt">30-month roadmap</span><span class="dot"></span></a>
+  <a href="#sec-7"><span class="txt">Capital & guardrails</span><span class="dot"></span></a>
+  <a href="#sec-8"><span class="txt">Risks & KRIs</span><span class="dot"></span></a>
+  <a href="#sec-9"><span class="txt">Methodology</span><span class="dot"></span></a>
 </nav>
 
 <main class="content">
@@ -267,7 +308,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
       <div class="metric"><div class="metric-value">50,700</div><div class="metric-label">Target effective throughput</div><div class="metric-note">+30% vs. today's ~39,000</div></div>
       <div class="metric"><div class="metric-value">~51,600</div><div class="metric-label">Projected outcome</div><div class="metric-note">+900-unit buffer (~2%)</div></div>
       <div class="metric"><div class="metric-value">$14.5–24<small>M</small></div><div class="metric-label">Capital used</div><div class="metric-note">of the $48M envelope</div></div>
-      <div class="metric"><div class="metric-value">4</div><div class="metric-label">Levers, sequenced</div><div class="metric-note">across 30 months — see §05</div></div>
+      <div class="metric"><div class="metric-value">4</div><div class="metric-label">Levers, sequenced</div><div class="metric-note">across 30 months — see §06</div></div>
     </div>
 
     <div class="banner banner--good" style="margin-top:20px;">
@@ -310,13 +351,41 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
     </div>
 
     <div class="banner banner--warn" style="margin-top:20px;">
-      <b>Sequencing risk to manage, not ignore:</b> speeding up the front office without also fixing Plant 2 doesn't add throughput — it just relocates the queue onto Plant 2's bottleneck. This is why the roadmap in §05 runs the Plant 2 fix in parallel with the front-office rollout, not after it.
+      <b>Sequencing risk to manage, not ignore:</b> speeding up the front office without also fixing Plant 2 doesn't add throughput — it just relocates the queue onto Plant 2's bottleneck. This is why the roadmap in §06 runs the Plant 2 fix in parallel with the front-office rollout, not after it.
+    </div>
+  </section>
+
+  <!-- 3. EXPLORE THE CHAIN -->
+  <section class="section" id="sec-3">
+    <div class="sec-num">03 — Explore the constraint chain</div>
+    <h2 class="sec-title">Every stage has a value-added slice and a friction slice — click to see how big each one is.</h2>
+    <p class="sec-lede">Across the full order-to-ship chain, <span class="highlight">only ~7% of front-office time is actual work</span>, and the three plants recover only <span class="highlight">52–71% of their bottleneck cell's theoretical output</span>. Expand a branch to see where each stage's time or capacity actually goes — this is the same evidence behind §02, just explorable.</p>
+
+    <div class="card card--white">
+      <div class="dz-controls">
+        <div class="dz-search" id="dzSearchBox">
+          <span class="mag">&#8981;</span>
+          <input id="dzQ" type="text" placeholder="Find a stage or plant..." autocomplete="off">
+          <button class="clr" id="dzQClr" title="Clear">&#10005;</button>
+        </div>
+        <button class="dz-tbtn" id="dzOpenAll">Expand all</button>
+        <button class="dz-tbtn" id="dzCloseAll">Collapse all</button>
+        <div class="dz-legend" id="dzLegend"><!-- populated by JS --></div>
+      </div>
+
+      <div class="dz-thead">
+        <div>Stage / plant</div>
+        <div>Composition</div>
+        <div style="text-align:right;">Size</div>
+      </div>
+      <div class="dz-tree" id="dzTree"><!-- populated by JS --></div>
+      <div class="dz-hint">Click a row with an arrow to open or close it &middot; click a legend chip to isolate value-added or friction across every bar &middot; size is scaled within its own group (front-office stages in weeks, plants in units/yr) &middot; hover a row for the evidence behind its number.</div>
     </div>
   </section>
 
   <!-- 3. INTERACTIVE BRIDGE -->
-  <section class="section" id="sec-3">
-    <div class="sec-num">03 — The interactive throughput bridge</div>
+  <section class="section" id="sec-4">
+    <div class="sec-num">04 — The interactive throughput bridge</div>
     <h2 class="sec-title">Toggle each lever to see what it's actually worth.</h2>
     <p class="sec-lede">This is the same model behind the recommendation — live. Turn a lever off to see what happens if the board doesn't fund it: the projected throughput, capital spend, quality, and cost all recompute immediately.</p>
 
@@ -335,8 +404,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   </section>
 
   <!-- 4. PLANT EVIDENCE -->
-  <section class="section" id="sec-4">
-    <div class="sec-num">04 — The three plants</div>
+  <section class="section" id="sec-5">
+    <div class="sec-num">05 — The three plants</div>
     <h2 class="sec-title">Three plants, three different constraints — aggregate numbers hide this.</h2>
     <p class="sec-lede">The plant-level data is what separates a defensible diagnosis from a coin flip between the two camps.</p>
 
@@ -366,8 +435,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   </section>
 
   <!-- 5. ROADMAP -->
-  <section class="section" id="sec-5">
-    <div class="sec-num">05 — 30-month roadmap</div>
+  <section class="section" id="sec-6">
+    <div class="sec-num">06 — 30-month roadmap</div>
     <h2 class="sec-title">Sequenced so no fix runs ahead of the constraint it depends on.</h2>
     <p class="sec-lede">The front-office and Plant 2 fixes run in parallel deliberately — see the sequencing risk in §02. A capital reserve is held, not committed, in case month-6/12 data says otherwise.</p>
 
@@ -386,7 +455,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
         <div class="timeline-track"><div class="timeline-bar wave-olive" style="left:13%;width:37%;">M4–15</div></div>
       </div>
       <div class="timeline-row">
-        <div class="row-label">Wave 3 — Plant 3 staffing & mix ramp<span class="row-sub">Highest single-lever risk — see §07</span></div>
+        <div class="row-label">Wave 3 — Plant 3 staffing & mix ramp<span class="row-sub">Highest single-lever risk — see §08</span></div>
         <div class="timeline-track"><div class="timeline-bar wave-olive" style="left:20%;width:37%;">M6–18</div></div>
       </div>
       <div class="timeline-row">
@@ -397,8 +466,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   </section>
 
   <!-- 6. CAPITAL & GUARDRAILS -->
-  <section class="section" id="sec-6">
-    <div class="sec-num">06 — Capital & guardrails</div>
+  <section class="section" id="sec-7">
+    <div class="sec-num">07 — Capital & guardrails</div>
     <h2 class="sec-title">Inside the envelope, inside the non-negotiables, with room to spare.</h2>
 
     <div class="grid4" style="margin-bottom:22px;">
@@ -421,8 +490,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   </section>
 
   <!-- 7. RISKS & KRIs -->
-  <section class="section" id="sec-7">
-    <div class="sec-num">07 — Risks & month-6 leading indicators</div>
+  <section class="section" id="sec-8">
+    <div class="sec-num">08 — Risks & month-6 leading indicators</div>
     <h2 class="sec-title">What could break this, and how the board will know by month 6.</h2>
 
     <div class="grid2">
@@ -449,8 +518,8 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   </section>
 
   <!-- 8. METHODOLOGY -->
-  <section class="section" id="sec-8">
-    <div class="sec-num">08 — Methodology</div>
+  <section class="section" id="sec-9">
+    <div class="sec-num">09 — Methodology</div>
     <h2 class="sec-title">How this diagnosis was built.</h2>
     <p class="sec-lede">This recommendation was developed through a structured four-persona roundtable — Business, Manufacturing/Ops, Analytics, and Decision — with an adversarial red-team pass against both board camps before the recommendation was locked. The full workpaper, including every assumption behind the numbers on this page, is in the project repo.</p>
     <div class="banner">
@@ -698,6 +767,178 @@ ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:10px;heig
   }
 
   renderAll();
+})();
+
+(function(){
+  // ---------- drill-down constraint-chain explorer ----------
+  // NOTE: this is GE Verona's own scenario data (front-office queue stats + plant OEE),
+  // not related to any other project — only the interaction pattern was borrowed.
+  var DZ_DATA = [
+    { key:'fo', name:'Front office (order \u2192 release)', unitLabel:'wk', size:7.3, eff:6.9,
+      note:'Order entry, engineering, and scheduling combined \u2014 7.3 of 14.2 weeks, and mostly queue, not work.',
+      children:[
+        { key:'fo0', name:'Order entry & configuration', unitLabel:'wk', size:3.5, eff:4,
+          note:'~4 hrs of touch time; ~96% is queue for clarification or missing customer specs.' },
+        { key:'fo1', name:'Engineering & drawing release', unitLabel:'wk', size:2.0, eff:11,
+          note:'~9 hrs of touch time; ~89% is queue in the shared 11-engineer pool.' },
+        { key:'fo2', name:'Material & scheduling', unitLabel:'wk', size:1.8, eff:8,
+          note:'~3 hrs of touch time; ~92% is queue waiting on the weekly batch cutoff.' }
+      ]},
+    { key:'sf', name:'Shop floor (machining \u2192 ship)', unitLabel:'wk', size:6.9, eff:65.0,
+      note:'OEE at each plant\u2019s bottleneck cell, used as its overall effectiveness proxy \u2014 the remaining 6.9 of 14.2 weeks.',
+      children:[
+        { key:'sf0', name:'Plant 1 \u2014 Verona (CNC bottleneck)', unitLabel:'units/yr', size:23400, eff:71,
+          note:'90% utilized \u2014 OEE recovery is the lever, not new equipment.' },
+        { key:'sf1', name:'Plant 2 \u2014 Brescia (Final-test bottleneck)', unitLabel:'units/yr', size:14800, eff:64,
+          note:'Reported "95% utilized" \u2014 worst OEE, downtime, changeover, and quality in the network.' },
+        { key:'sf2', name:'Plant 3 \u2014 Padua (Assembly bottleneck)', unitLabel:'units/yr', size:9800, eff:52,
+          note:'58% utilized \u2014 gated by a 22% skilled-labor vacancy, not floor space.' }
+      ]}
+  ];
+
+  var dzExpanded = new Set(['fo','sf']);
+  var dzActiveChip = null;
+  var dzQuery = '';
+  var dzPreSearchExpanded = null;
+
+  function dzEsc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+  function dzFind(list, key){
+    for(var i=0;i<list.length;i++){
+      if(list[i].key===key) return list[i];
+      if(list[i].children){ var f = dzFind(list[i].children, key); if(f) return f; }
+    }
+    return null;
+  }
+
+  function dzNameHTML(n){
+    var name = n.name;
+    if(dzQuery && name.toLowerCase().includes(dzQuery)){
+      var idx = name.toLowerCase().indexOf(dzQuery);
+      return dzEsc(name.slice(0,idx)) + '<span class="dz-hit">' + dzEsc(name.slice(idx, idx+dzQuery.length)) + '</span>' + dzEsc(name.slice(idx+dzQuery.length));
+    }
+    return dzEsc(name);
+  }
+
+  function dzRowHTML(n, depth, hasKids){
+    var isOpen = dzExpanded.has(n.key);
+    var fric = Math.round((100-n.eff)*10)/10;
+    var effOpacity = (dzActiveChip && dzActiveChip!=='eff') ? 0.28 : 1;
+    var fricOpacity = (dzActiveChip && dzActiveChip!=='fric') ? 0.28 : 1;
+    var sizeLabel = n.unitLabel==='wk' ? (n.size+' wk') : (Math.round(n.size).toLocaleString('en-US')+' u/yr');
+    return '' +
+    '<div class="dz-row d'+depth+(hasKids?'':' leaf')+'" data-key="'+n.key+'" title="'+dzEsc(n.note||'')+'">' +
+      '<div class="dz-lab">' +
+        '<span class="dz-chev '+(hasKids ? (isOpen?'open':'') : 'none')+'">'+(hasKids?'\u25B6':'')+'</span>' +
+        '<span class="dz-nm">'+dzNameHTML(n)+'</span>' +
+      '</div>' +
+      '<div class="dz-stack">' +
+        '<div class="dz-seg eff" style="width:'+n.eff+'%;opacity:'+effOpacity+';">'+(n.eff>=12?n.eff.toFixed(0)+'% value-add':'')+'</div>' +
+        '<div class="dz-seg fric" style="width:'+fric+'%;opacity:'+fricOpacity+';">'+(fric>=12?fric.toFixed(0)+'% friction':'')+'</div>' +
+      '</div>' +
+      '<div class="dz-size">'+sizeLabel+'</div>' +
+    '</div>';
+  }
+
+  function dzRenderNode(n, depth){
+    var hasKids = !!(n.children && n.children.length);
+    var html = dzRowHTML(n, depth, hasKids);
+    if(hasKids){
+      var isOpen = dzExpanded.has(n.key);
+      html += '<div class="dz-kids'+(isOpen?' open':'')+'" data-parent="'+n.key+'"><div class="dz-kids-inner"><div class="dz-pad">';
+      n.children.forEach(function(c){ html += dzRenderNode(c, depth+1); });
+      html += '</div></div></div>';
+    }
+    return html;
+  }
+
+  function dzBindRows(){
+    document.querySelectorAll('#dzTree .dz-row').forEach(function(row){
+      row.addEventListener('click', function(){
+        var key = row.getAttribute('data-key');
+        var node = dzFind(DZ_DATA, key);
+        if(!node || !node.children || !node.children.length) return;
+        if(dzExpanded.has(key)) dzExpanded.delete(key); else dzExpanded.add(key);
+        dzRenderTree();
+      });
+    });
+  }
+
+  function dzRenderTree(){
+    var el = document.getElementById('dzTree');
+    var html='';
+    DZ_DATA.forEach(function(n){ html += dzRenderNode(n, 0); });
+    el.innerHTML = html;
+    dzBindRows();
+  }
+
+  function dzRenderLegend(){
+    var el = document.getElementById('dzLegend');
+    var chips = [
+      {id:'eff', label:'Value-added', color:'var(--olive)'},
+      {id:'fric', label:'Friction / queue', color:'var(--warning)'}
+    ];
+    el.innerHTML = chips.map(function(c){
+      var off = dzActiveChip && dzActiveChip!==c.id;
+      return '<button class="dz-chip'+(off?' off':'')+'" data-chip="'+c.id+'" style="background:'+(off?'':c.color)+';">'+c.label+'</button>';
+    }).join('');
+    el.querySelectorAll('.dz-chip').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-chip');
+        dzActiveChip = (dzActiveChip===id) ? null : id;
+        dzRenderLegend();
+        dzRenderTree();
+      });
+    });
+  }
+
+  function dzExpandAllWithMatches(){
+    dzExpanded = new Set();
+    (function walk(list, ancestors){
+      list.forEach(function(n){
+        var self = n.name.toLowerCase().includes(dzQuery);
+        var childHit = false;
+        if(n.children){
+          n.children.forEach(function(c){ if(c.name.toLowerCase().includes(dzQuery)) childHit = true; });
+          walk(n.children, ancestors.concat([n.key]));
+        }
+        if(self || childHit){
+          ancestors.forEach(function(k){ dzExpanded.add(k); });
+          if(n.children && n.children.length) dzExpanded.add(n.key);
+        }
+      });
+    })(DZ_DATA, []);
+  }
+
+  var dzInput = document.getElementById('dzQ');
+  var dzClr = document.getElementById('dzQClr');
+  var dzBox = document.getElementById('dzSearchBox');
+
+  dzInput.addEventListener('input', function(){
+    dzQuery = dzInput.value.trim().toLowerCase();
+    dzBox.classList.toggle('has', !!dzQuery);
+    if(dzQuery){
+      if(dzPreSearchExpanded===null) dzPreSearchExpanded = new Set(dzExpanded);
+      dzExpandAllWithMatches();
+    } else if(dzPreSearchExpanded!==null){
+      dzExpanded = dzPreSearchExpanded; dzPreSearchExpanded = null;
+    }
+    dzRenderTree();
+  });
+  dzClr.addEventListener('click', function(){
+    dzInput.value=''; dzQuery=''; dzBox.classList.remove('has');
+    if(dzPreSearchExpanded!==null){ dzExpanded = dzPreSearchExpanded; dzPreSearchExpanded=null; }
+    dzRenderTree();
+  });
+  document.getElementById('dzOpenAll').addEventListener('click', function(){
+    dzExpanded = new Set();
+    (function walk(list){ list.forEach(function(n){ if(n.children && n.children.length){ dzExpanded.add(n.key); walk(n.children); } }); })(DZ_DATA);
+    dzRenderTree();
+  });
+  document.getElementById('dzCloseAll').addEventListener('click', function(){ dzExpanded = new Set(); dzRenderTree(); });
+
+  dzRenderLegend();
+  dzRenderTree();
 })();
 </script>
 </body>

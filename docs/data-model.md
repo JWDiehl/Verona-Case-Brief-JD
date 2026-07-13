@@ -67,3 +67,29 @@ Plant 2's post-fix produced figure (15,900) sits ~2.5% above its stated nameplat
 - **OTIF lever off:** OTIF reverts to 81%, applied to whatever produced total is active.
 - **Any plant lever off:** that plant's produced units, quality, and cost index revert to baseline; its capital and time-to-effect drop out of the totals.
 - Capital, quality, cost, and the waterfall bar all recompute live — this is what lets the board ask "what if we skip Plant 3" and see the consequence immediately, in the room.
+
+## Section 03 — the drill-down "value-added vs. friction" explorer
+
+A separate, exploratory view of the same evidence in §02, styled as an expandable tree (front-office stages under one branch, plants under another). Every node reduces to two numbers that sum to 100%: **value-added** (real work / effective output) and **friction** (queue, rework, downtime, changeover, quality loss).
+
+**Front-office branch** — friction = the scenario's own cited "% in queue/rework" per stage; value-added = the remainder:
+
+| Stage | Elapsed | Value-added | Friction |
+|---|---|---|---|
+| Order entry & configuration | 3.5 wk | 4% | 96% |
+| Engineering & drawing release | 2.0 wk | 11% | 89% |
+| Material & scheduling | 1.8 wk | 8% | 92% |
+| **Front office (weighted)** | **7.3 wk** | **6.9%** | **93.1%** |
+
+**Shop-floor branch** — value-added = OEE at the plant's bottleneck cell (used as a proxy for the whole plant's effectiveness); friction = 100 − OEE:
+
+| Plant | Units/yr | Value-added (OEE) | Friction |
+|---|---|---|---|
+| Plant 1 — Verona (CNC) | 23,400 | 71% | 29% |
+| Plant 2 — Brescia (Final test) | 14,800 | 64% | 36% |
+| Plant 3 — Padua (Assembly) | 9,800 | 52% | 48% |
+| **Shop floor (weighted by units)** | **48,000** | **65.0%** | **35.0%** |
+
+Front office (7.3 wk) + shop floor (6.9 wk, from the value-stream flow: machining 3.2 + assembly 2.4 + ship 1.3) = 14.2 wk, matching the case's stated average lead time exactly — a useful internal consistency check.
+
+This section's interaction pattern (expand-in-place tree, stacked composition bar, toggleable legend chips, live search) was adapted from an unrelated internal tool a colleague built for org/headcount exploration — only the UI pattern was reused; none of that tool's data or domain is part of this brief.
